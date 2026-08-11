@@ -6,7 +6,7 @@
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self' https://formsubmit.co">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <meta name="robots" content="noindex">
-<title>Víbrur Games — Playtest Report</title>
+<title>Víbrur Games · Playtest Report</title>
 <meta name="description" content="Playtest report form for Better Together testers.">
 <meta name="theme-color" content="#a3bdd4">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect width='16' height='16' fill='%23a3bdd4'/%3E%3Ccircle cx='8' cy='8' r='2' fill='%23f6fafc'/%3E%3C/svg%3E">
@@ -37,17 +37,17 @@
 </button>
 
 <main class="page report">
-  <h1 class="visually-hidden">Víbrur Games — Playtest Report</h1>
+  <h1 class="visually-hidden">Víbrur Games · Playtest Report</h1>
 
   <section class="reveal on">
     <h2 class="sec-label" data-index="00">Playtest report</h2>
     <p>You played <strong>Better Together</strong>. Thank you. Now tell me everything.</p>
-    <p>Most of this form is <strong>tap-what's-true</strong> — type only where you have something to say. Every question is optional except your name and the build number. There are no wrong answers; if you were confused, that is the game's fault, not yours, and exactly what I need to hear. Answer in <strong>Icelandic or English</strong>, whichever is faster.</p>
-    <p class="mono-note">about 5 minutes if you mostly tap. answers autosave in this browser as you type, and everything — including your log file, if you attach one — comes straight to me when you hit <strong>send</strong>. no account, no login. one ask: write about the session you <em>just</em> played, not last week's.</p>
+    <p>Most of this form is <strong>tap-what's-true</strong>, so type only where you have something to say. Every question is optional except your name and the build number. There are no wrong answers; if you were confused, that is the game's fault, not yours, and exactly what I need to hear. Answer in <strong>Icelandic or English</strong>, whichever is faster.</p>
+    <p class="mono-note">about 5 minutes if you mostly tap. answers autosave in this browser as you type, and everything, including your log file if you attach one, comes straight to me when you hit <strong>send</strong>. no account, no login. one ask: write about the session you <em>just</em> played, not last week's.</p>
   </section>
 
   <form id="report-form" action="https://formsubmit.co/dromi@vibrur.is" method="POST" enctype="multipart/form-data" autocomplete="off">
-    <input type="hidden" id="subject-field" name="_subject" value="Better Together — playtest report">
+    <input type="hidden" id="subject-field" name="_subject" value="Better Together playtest report">
     <input type="hidden" name="_template" value="table">
     <input type="hidden" name="_captcha" value="false">
     <input type="hidden" name="_next" value="https://vibrur.is/report/thanks.html">
@@ -59,7 +59,7 @@
     <h2 class="sec-label" data-index="01">Your session <span class="sec-time">~1 min</span></h2>
 
     <div class="q">
-      <label class="q-label" for="q-name">Your name or nickname <span class="req">(required — so I can match you to your log files)</span></label>
+      <label class="q-label" for="q-name">Your name or nickname <span class="req">(required, so I can match you to your log files)</span></label>
       <input type="text" id="q-name" name="name" required>
       <span class="hint">if your Steam name is different, put both</span>
     </div>
@@ -67,13 +67,13 @@
     <div class="q">
       <label class="q-label" for="q-build">Which build did you play? <span class="req">(required)</span></label>
       <input type="text" id="q-build" name="build_version" required>
-      <span class="hint">main menu, along the bottom of the screen: <code>BUILD 0.0.3.27</code> — copy whatever number yours says. can't find it? write "don't know" and send anyway.</span>
+      <span class="hint">main menu, along the bottom of the screen: <code>BUILD 0.0.3.27</code>. copy whatever number yours says. can't find it? write "don't know" and send anyway.</span>
     </div>
 
     <div class="q">
       <label class="q-label" for="q-when">When did you play, and for roughly how long?</label>
       <input type="text" id="q-when" name="when_played">
-      <span class="hint">a date and a rough clock time let me find your session in the log — e.g. "July 19, started around 20:00, about 2 hours"</span>
+      <span class="hint">a date and a rough clock time let me find your session in the log. for example "July 19, started around 20:00, about 2 hours"</span>
     </div>
 
     <div class="q" data-label="Which machine did you play on?">
@@ -128,9 +128,9 @@
       <span class="q-label">Your setup</span>
 
       <div class="subq">
-        <label class="subq-label" for="q-specs">PC — CPU / graphics card / RAM</label>
+        <label class="subq-label" for="q-specs">PC: CPU / graphics card / RAM</label>
         <input type="text" id="q-specs" name="pc_specs">
-        <span class="hint">don't worry if you don't know — anything helps, even "gaming laptop from 2021"</span>
+        <span class="hint">don't worry if you don't know, anything helps, even "gaming laptop from 2021"</span>
       </div>
 
       <div class="subq" data-label="Played with">
@@ -173,8 +173,8 @@
   <section class="reveal on" data-sec="Getting in">
     <h2 class="sec-label" data-index="02">Getting in <span class="sec-time">~30 sec</span></h2>
 
-    <div class="q" data-label="Getting into the game — installing, updating, hosting, joining — went…">
-      <span class="q-label" id="lbl-getin">Getting into the game — installing, updating, hosting, joining — went…</span>
+    <div class="q" data-label="Getting into the game (installing, updating, hosting, joining) went…">
+      <span class="q-label" id="lbl-getin">Getting into the game (installing, updating, hosting, joining) went…</span>
       <div class="choices" role="radiogroup" aria-labelledby="lbl-getin">
         <label><input type="radio" name="getting_in" value="smoothly"><span>smoothly</span></label>
         <label><input type="radio" name="getting_in" value="mostly fine"><span>mostly fine</span></label>
@@ -204,7 +204,7 @@
     <h2 class="sec-label" data-index="03">Finding your feet <span class="sec-time">~1 min</span></h2>
 
     <div class="q">
-      <label class="q-label" for="q-goal">In your own words — what is this game asking you to do?</label>
+      <label class="q-label" for="q-goal">In your own words, what is this game asking you to do?</label>
       <textarea id="q-goal" name="perceived_goal"></textarea>
       <span class="hint">answer from what the game showed you, not from what anyone told you</span>
     </div>
@@ -212,7 +212,7 @@
     <div class="q">
       <label class="q-label" for="q-toldby">What did you have to be told by another player, or work out the hard way?</label>
       <textarea id="q-toldby" name="learned_the_hard_way"></textarea>
-      <span class="hint">a button, a key, where something is, what something was for — anything the game should have told you itself</span>
+      <span class="hint">a button, a key, where something is, what something was for. anything the game should have told you itself</span>
     </div>
 
     <div class="q" data-label="Was there ever a stretch with nothing to do?">
@@ -257,11 +257,11 @@
         <label><input type="radio" name="day_reached" value="day 8 or later"><span>day 8+</span></label>
         <label><input type="radio" name="day_reached" value="not sure"><span>not sure</span></label>
       </div>
-      <span class="hint">the day you ended on — if you continued from an earlier save, that still counts</span>
+      <span class="hint">the day you ended on. if you continued from an earlier save, that still counts</span>
     </div>
 
-    <div class="q" data-label="The chores — worth doing?">
-      <span class="q-label" id="lbl-chores">The chores — worth doing?</span>
+    <div class="q" data-label="The chores: worth doing?">
+      <span class="q-label" id="lbl-chores">The chores: worth doing?</span>
       <div class="choices" role="radiogroup" aria-labelledby="lbl-chores">
         <label><input type="radio" name="chores_feel" value="worth it"><span>worth it</span></label>
         <label><input type="radio" name="chores_feel" value="fine, a bit repetitive"><span>fine, a bit repetitive</span></label>
@@ -272,7 +272,7 @@
     </div>
 
     <div class="q">
-      <label class="q-label" for="q-shop">The shop — what did you buy? Did each thing actually work when you tried to use it?</label>
+      <label class="q-label" for="q-shop">The shop: what did you buy? Did each thing actually work when you tried to use it?</label>
       <textarea id="q-shop" name="shop_items"></textarea>
       <span class="hint">list them one by one if you can. "bought the tripwire, couldn't place it anywhere" is worth more to me than anything else on this page.</span>
     </div>
@@ -294,7 +294,7 @@
     </div>
   </section>
 
-  <p class="mono-note milestone">halfway — and even a half-filled report is worth sending. the send button works from anywhere.</p>
+  <p class="mono-note milestone">halfway, and even a half-filled report is worth sending. the send button works from anywhere.</p>
 
   <section class="reveal on" data-sec="Playing together">
     <h2 class="sec-label" data-index="05">Playing together <span class="sec-time">~45 sec</span></h2>
@@ -313,11 +313,11 @@
     <div class="q" data-show-when="voice_status=choppy or robotic at times|someone couldn't hear or talk|didn't work at all">
       <label class="q-label" for="q-voice">Who had the problem, and did anything fix it?</label>
       <textarea id="q-voice" name="voice_detail"></textarea>
-      <span class="hint">"X couldn't hear Y after we died once" — that shape of sentence is exactly what I need. rejoining, restarting, changing a setting — tell me what fixed it, if anything did.</span>
+      <span class="hint">"X couldn't hear Y after we died once" is exactly the shape of sentence I need. rejoining, restarting, changing a setting: tell me what fixed it, if anything did.</span>
     </div>
 
     <div class="q">
-      <label class="q-label" for="q-desync">Did the game ever disagree with itself — a door open for one of you but closed for another, an item only one player could see, someone walking in place?</label>
+      <label class="q-label" for="q-desync">Did the game ever disagree with itself, a door open for one of you but closed for another, an item only one player could see, someone walking in place?</label>
       <textarea id="q-desync" name="desyncs"></textarea>
       <span class="hint">sounds impossible, happens constantly. anything like this you noticed, however small.</span>
     </div>
@@ -343,7 +343,7 @@
     <div class="q">
       <label class="q-label" for="q-scariest">Scariest or tensest moment of this session?</label>
       <textarea id="q-scariest" name="scariest_moment"></textarea>
-      <span class="hint">and when did the night first start to feel dangerous — or did it never?</span>
+      <span class="hint">and when did the night first start to feel dangerous, or did it never?</span>
     </div>
 
     <div class="q" data-label="The fear level was…">
@@ -366,7 +366,7 @@
     </div>
 
     <div class="q">
-      <label class="q-label" for="q-controls">Anything specific that felt clumsy — walking, doors, picking things up, menus?</label>
+      <label class="q-label" for="q-controls">Anything specific that felt clumsy: walking, doors, picking things up, menus?</label>
       <textarea id="q-controls" name="controls_detail"></textarea>
     </div>
 
@@ -386,7 +386,7 @@
     <h2 class="sec-label" data-index="07">What broke <span class="sec-time">~1 min</span></h2>
 
     <div class="callout">
-      <p class="mono-note">this session only, please — if it's been broken for weeks, or you already sent it to me, leave it out. that's how I tell what's still broken from what I've already fixed.</p>
+      <p class="mono-note">this session only, please. if it's been broken for weeks, or you already sent it to me, leave it out. that's how I tell what's still broken from what I've already fixed.</p>
     </div>
 
     <div class="q" data-label="Tick anything that happened this session:">
@@ -401,8 +401,8 @@
         <label><input type="checkbox" name="what_broke" value="the game froze or stuttered badly"><span>froze or stuttered badly</span></label>
         <label><input type="checkbox" name="what_broke" value="saving or continuing didn't work right"><span>save / continue went wrong</span></label>
         <label><input type="checkbox" name="what_broke" value="an item vanished or wouldn't work"><span>an item vanished / wouldn't work</span></label>
-        <label><input type="checkbox" name="what_broke" value="something looked wrong — text, HUD, lighting, floating objects"><span>something looked wrong</span></label>
-        <label><input type="checkbox" name="what_broke" value="sound was wrong — missing, too loud, or wouldn't stop"><span>sound was wrong</span></label>
+        <label><input type="checkbox" name="what_broke" value="something looked wrong: text, HUD, lighting, floating objects"><span>something looked wrong</span></label>
+        <label><input type="checkbox" name="what_broke" value="sound was wrong: missing, too loud, or wouldn't stop"><span>sound was wrong</span></label>
         <label><input type="checkbox" name="what_broke" value="none of these"><span>none of these</span></label>
       </div>
     </div>
@@ -418,9 +418,9 @@
     </div>
 
     <div class="q">
-      <label class="q-label" for="q-brokedetail">For anything you ticked — what were you doing, and roughly when?</label>
+      <label class="q-label" for="q-brokedetail">For anything you ticked, what were you doing, and roughly when?</label>
       <textarea id="q-brokedetail" name="what_broke_detail"></textarea>
-      <span class="hint">rough clock times ("around 21:30") help me find the exact moment in your log. anything else you noticed — stuck spots, floating objects, missing text, weird lighting — goes here too.</span>
+      <span class="hint">rough clock times ("around 21:30") help me find the exact moment in your log. anything else you noticed (stuck spots, floating objects, missing text, weird lighting) goes here too.</span>
     </div>
   </section>
 
@@ -460,11 +460,11 @@
       <span class="q-label" id="lbl-price">If it hit Early Access tomorrow, a fair price would be…</span>
       <div class="choices" role="radiogroup" aria-labelledby="lbl-price">
         <label><input type="radio" name="fair_price" value="under €10"><span>under €10</span></label>
-        <label><input type="radio" name="fair_price" value="€10–15"><span>€10–15</span></label>
-        <label><input type="radio" name="fair_price" value="€15–20"><span>€15–20</span></label>
+        <label><input type="radio" name="fair_price" value="€10 to 15"><span>€10 to 15</span></label>
+        <label><input type="radio" name="fair_price" value="€15 to 20"><span>€15 to 20</span></label>
         <label><input type="radio" name="fair_price" value="over €20"><span>over €20</span></label>
       </div>
-      <span class="hint">honest answers only — you cannot hurt my feelings with this one</span>
+      <span class="hint">honest answers only, you cannot hurt my feelings with this one</span>
     </div>
 
     <div class="q">
@@ -478,19 +478,19 @@
     </div>
 
     <div class="q">
-      <label class="q-label" for="q-recording">Did you record or stream your session? Paste a link — I would love to watch it.</label>
+      <label class="q-label" for="q-recording">Did you record or stream your session? Paste a link, I would love to watch it.</label>
       <input type="text" id="q-recording" name="session_recording">
     </div>
 
     <div class="q">
-      <label class="q-label" for="q-anything">Anything else — thoughts, feelings, theories, complaints, ideas?</label>
+      <label class="q-label" for="q-anything">Anything else: thoughts, feelings, theories, complaints, ideas?</label>
       <textarea id="q-anything" name="anything_else"></textarea>
     </div>
   </section>
 
   <section class="reveal on">
-    <h2 class="sec-label" data-index="09">Your logs — optional, but gold <span class="sec-time">~30 sec</span></h2>
-    <p>Your game wrote a log file while you played. It tells me exactly what went wrong on your machine, and attaching it is the single most useful thing you can do. It rides along with this form — no separate email:</p>
+    <h2 class="sec-label" data-index="09">Your logs, optional but gold <span class="sec-time">~30 sec</span></h2>
+    <p>Your game wrote a log file while you played. It tells me exactly what went wrong on your machine, and attaching it is the single most useful thing you can do. It rides along with this form, no separate email:</p>
     <ol class="steps">
       <li>Click <strong>Choose file</strong> below.</li>
       <li>In the window that opens, click the address bar at the top, paste this line, and press Enter:<br><code>%LOCALAPPDATA%\BetterTogether\Saved\Logs</code></li>
@@ -499,7 +499,7 @@
     <div class="q">
       <label class="q-label" for="q-attach">Attach your log file(s)</label>
       <input type="file" id="q-attach" name="attachment" multiple accept=".log,.txt,.zip,.dmp,.gz,.json,.png,.jpg,.jpeg,.webp">
-      <span class="hint" id="attach-hint">screenshots of bugs are welcome here too. up to 10 MB total — bigger than that? email it to dromi@vibrur.is instead; the rest still sends.</span>
+      <span class="hint" id="attach-hint">screenshots of bugs are welcome here too. up to 10 MB total. bigger than that? email it to dromi@vibrur.is instead; the rest still sends.</span>
     </div>
   </section>
 
@@ -510,8 +510,8 @@
       <button type="submit" class="support-btn" id="btn-send">send my report</button>
       <button type="button" class="support-btn" id="btn-download">download my answers as a .txt</button>
     </div>
-    <p class="mono-note" id="send-status" aria-live="polite">one click and it comes straight to me — answers and log together.</p>
-    <p class="mono-note">the report also notes which browser and screen it was filled in on — nothing else.</p>
+    <p class="mono-note" id="send-status" aria-live="polite">one click and it comes straight to me, answers and log together.</p>
+    <p class="mono-note">the report also notes which browser and screen it was filled in on, nothing else.</p>
     <p class="mono-note clear-row"><button type="button" id="btn-clear" class="linklike">clear all my answers and start over</button></p>
   </section>
 

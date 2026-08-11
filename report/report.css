@@ -1,4 +1,4 @@
-/* Víbrur Games — playtest report page */
+/* Víbrur Games playtest report page */
 
 .report {
   padding-top: 18vh;
@@ -142,7 +142,7 @@
 /* ---- honeypot ----
    Off-screen, never focusable. Lives here rather than in a style
    attribute because the page's CSP sets style-src 'self', which
-   blocks inline styles — as an attribute it rendered as a visible
+   blocks inline styles; as an attribute it rendered as a visible
    text box mid-form. */
 
 .honey {
@@ -266,7 +266,7 @@
 
 .choices.scale label { padding: 0.45rem 0.85rem; }
 
-/* the what-broke tick grid — denser than a chip row */
+/* the what-broke tick grid, denser than a chip row */
 .choices.ticks { gap: 0.4rem; }
 .choices.ticks label { padding: 0.45rem 0.75rem; }
 

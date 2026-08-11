@@ -1,0 +1,5 @@
+Contact: mailto:dromi@vibrur.is
+Preferred-Languages: en, is
+Canonical: https://vibrur.is/.well-known/security.txt
+Policy: https://vibrur.is/privacy-policy
+Expires: 2027-08-11T00:00:00.000Z

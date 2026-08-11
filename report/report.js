@@ -1,4 +1,4 @@
-/* Víbrur Games — playtest report page behaviour
+/* Víbrur Games playtest report page behaviour
    ================================================================
    The form POSTs straight to a form backend (FormSubmit) which
    emails the answers + any attached log file to dromi@vibrur.is.
@@ -15,7 +15,7 @@
   var STORAGE_KEY = "bt-playtest-report-v1";
   var MAX_BYTES = 10 * 1024 * 1024; // FormSubmit free tier: 10 MB total
   var ATTACH_IDLE_TEXT = "screenshots of bugs are welcome here too. " +
-    "up to 10 MB total — bigger than that? email it to dromi@vibrur.is " +
+    "up to 10 MB total. bigger than that? email it to dromi@vibrur.is " +
     "instead; the rest still sends.";
 
   var form = document.getElementById("report-form");
@@ -55,7 +55,7 @@
 
   function save() {
     try { localStorage.setItem(STORAGE_KEY, JSON.stringify(snapshot())); }
-    catch (e) { /* private mode / quota — autosave off, form still works */ }
+    catch (e) { /* private mode or quota exceeded: autosave off, form still works */ }
   }
 
   function restore() {
@@ -113,7 +113,7 @@
 
   /* ---- answerable units -------------------------------------
      Most .q blocks hold one answer. The setup block holds several,
-     each wrapped in a .subq — so the export walks subqs where they
+     each wrapped in a .subq, so the export walks subqs where they
      exist and the .q itself where they don't. The counter, by
      contrast, always counts whole .q blocks: a five-row setup block
      reads as one question to the person filling it in, and inflating
@@ -158,7 +158,7 @@
     });
     if (countEl) {
       countEl.textContent = "answered " + answered + " of " + total +
-        " — every one helps, only your name and build number are required";
+        ". every one helps, only your name and build number are required";
     }
     if (pillFill) {
       pillFill.style.width = (total ? Math.round(100 * answered / total) : 0) + "%";
@@ -194,14 +194,14 @@
     var bytes = totalFileBytes();
     if (bytes > MAX_BYTES) {
       attachHint.textContent = "that's " + fmtMB(bytes) +
-        " — over the 10 MB limit. attach just the newest BetterTogether.log, " +
+        ", over the 10 MB limit. attach just the newest BetterTogether.log, " +
         "or email the big file to dromi@vibrur.is. (your answers will still send.)";
       attachHint.classList.add("attach-over");
       return false;
     }
     attachHint.classList.remove("attach-over");
     attachHint.textContent = bytes > 0
-      ? "attached " + fmtMB(bytes) + " — good to go."
+      ? "attached " + fmtMB(bytes) + ", good to go."
       : ATTACH_IDLE_TEXT;
     return true;
   }
@@ -213,19 +213,19 @@
      DOM (not localStorage) so it matches what's on screen. */
 
   function labelFor(unit) {
-    // data-label wins where it exists — it is the one place the exact
+    // data-label wins where it exists. It is the one place the exact
     // exported wording is set by hand.
     var explicit = unit.getAttribute("data-label");
     if (explicit) return explicit;
     var el = unit.querySelector(".q-label, .subq-label");
     if (!el) return "(question)";
     var clone = el.cloneNode(true);
-    // drop the "(required — …)" note
+    // drop the "(required …)" note; matched by class, not by wording
     clone.querySelectorAll(".req").forEach(function (n) {
       n.parentNode.removeChild(n);
     });
-    // keep the 1–5 anchors, but set them off — a bare "Fun / 4" in the
-    // exported file is unreadable without knowing which end is good.
+    // keep the 1 to 5 anchors, but set them off, because a bare "Fun / 4"
+    // in the exported file is unreadable without knowing which end is good.
     clone.querySelectorAll(".hint-inline").forEach(function (n) {
       n.textContent = " (" + n.textContent.replace(/\s+/g, " ").trim() + ")";
     });
@@ -250,7 +250,7 @@
     var nameField = document.getElementById("q-name");
     var name = nameField ? nameField.value.trim() : "";
     var ctxField = document.getElementById("browser-context");
-    var lines = ["BETTER TOGETHER — PLAYTEST REPORT"];
+    var lines = ["BETTER TOGETHER · PLAYTEST REPORT"];
     if (name) lines.push("From: " + name);
     lines.push("Saved: " + new Date().toString());
     if (ctxField && ctxField.value) lines.push("Filled in from: " + ctxField.value);
@@ -270,7 +270,7 @@
     });
 
     if (totalFileBytes() > 0) {
-      lines.push("", "(Log files can't ride along in a .txt — send them separately.)");
+      lines.push("", "(Log files can't ride along in a .txt, so send them separately.)");
     }
     return lines.join("\r\n");
   }
@@ -299,8 +299,8 @@
   /* ---- browser context ---------------------------------------
      One line about the browser/screen the FORM was filled in on
      (disclosed next to the send button). Deliberately weak
-     evidence — a report typed on a phone says nothing about the
-     gaming PC — but it separates "filled in at the desk" from
+     evidence, since a report typed on a phone says nothing about the
+     gaming PC, but it separates "filled in at the desk" from
      "filled in on the couch", and OS strings catch Mac reports. */
 
   function fillBrowserContext() {
@@ -316,7 +316,7 @@
         navigator.userAgent || ""
       ];
       el.value = parts.filter(Boolean).join(" · ");
-    } catch (e) { /* leave empty — a nicety, not a requirement */ }
+    } catch (e) { /* leave empty; a nicety, not a requirement */ }
   }
 
   /* ---- wiring ----------------------------------------------- */
@@ -343,7 +343,7 @@
     if (!checkFiles()) {
       e.preventDefault();
       if (sendStatus) {
-        sendStatus.textContent = "please shrink or remove the attachment first (or email it separately) — then hit send again.";
+        sendStatus.textContent = "please shrink or remove the attachment first (or email it separately), then hit send again.";
         sendStatus.classList.add("attach-over");
       }
       if (fileInput) fileInput.scrollIntoView({ behavior: "smooth", block: "center" });
@@ -363,7 +363,7 @@
         var bits = ["BT playtest"];
         if (nameField && nameField.value.trim()) bits.push(nameField.value.trim());
         if (buildField && buildField.value.trim()) bits.push("build " + buildField.value.trim());
-        subj.value = bits.join(" — ");
+        subj.value = bits.join(" · ");
       }
     } catch (err) { /* formatting is a nicety; the fields still send */ }
 

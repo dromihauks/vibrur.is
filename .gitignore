@@ -3,3 +3,11 @@ inspo2.jpg
 team/hrafnar.JPG
 team/greta.jpg
 .en-trans-password
+
+# This repo is public. en-trans/index.html must only ever hold ciphertext, so a
+# plaintext copy of the editor must never be committable, not even briefly while
+# it is being previewed locally. bt_entrans_encrypt.py also scans its own output
+# for plaintext and refuses to publish if it finds any.
+_preview_editor.html
+*.plain.html
+en-trans/*.txt

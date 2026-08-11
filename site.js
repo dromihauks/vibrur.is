@@ -1,4 +1,4 @@
-/* Víbrur Games — site behaviour
+/* Víbrur Games site behaviour
    ================================================================
    CONFIG is the only thing you need to edit.
    - socials: paste full profile URLs; empty string = shown dimmed, unclickable
@@ -9,7 +9,7 @@
 const CONFIG = {
   socials: {
     instagram: "https://www.instagram.com/vibrur",
-    tiktok: "https://www.tiktok.com/@vibrur", // assumed same handle — correct me if TikTok differs
+    tiktok: "https://www.tiktok.com/@vibrur", // assumed same handle, correct me if TikTok differs
   },
   team: [
     { name: "Drómi Hauksson", role: "executive founder · game director", img: "team/dromi.jpg" },
@@ -120,7 +120,7 @@ const CONFIG = {
       hour: "2-digit", minute: "2-digit", second: "2-digit",
       hour12: false,
     });
-    const tickClock = () => { clock.textContent = "64.14°N 21.94°W — " + fmt.format(new Date()); };
+    const tickClock = () => { clock.textContent = "64.14°N 21.94°W · " + fmt.format(new Date()); };
     tickClock();
     setInterval(tickClock, 1000);
   }
@@ -144,7 +144,9 @@ const CONFIG = {
     if (url) {
       a.href = url;
       a.target = "_blank";
-      a.rel = "noopener";
+      // noreferrer as well as noopener: the destination should not learn which
+      // page on this site sent the visitor.
+      a.rel = "noopener noreferrer";
     } else {
       a.classList.add("pending");
       a.removeAttribute("href");
@@ -198,14 +200,16 @@ const CONFIG = {
         a.className = "support-btn";
         a.href = d.url;
         a.target = "_blank";
-        a.rel = "noopener";
+        // noreferrer as well as noopener: the destination should not learn which
+      // page on this site sent the visitor.
+      a.rel = "noopener noreferrer";
         a.textContent = d.label;
         supportWrap.appendChild(a);
       }
     } else {
       const ghost = document.createElement("span");
       ghost.className = "support-btn ghost";
-      ghost.textContent = "— — —";
+      ghost.textContent = "· · ·";
       supportWrap.appendChild(ghost);
     }
   }
