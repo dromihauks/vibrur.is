@@ -43,7 +43,7 @@
     <h2 class="sec-label" data-index="00">Playtest report</h2>
     <p>You played <strong>Better Together</strong>. Thank you. Now tell me everything.</p>
     <p>Most of this form is <strong>tap-what's-true</strong>, so type only where you have something to say. Every question is optional except your name and the build number. There are no wrong answers; if you were confused, that is the game's fault, not yours, and exactly what I need to hear. Answer in <strong>Icelandic or English</strong>, whichever is faster.</p>
-    <p class="mono-note">about 5 minutes if you mostly tap. answers autosave in this browser as you type, and everything, including your log file if you attach one, comes straight to me when you hit <strong>send</strong>. no account, no login. one ask: write about the session you <em>just</em> played, not last week's.</p>
+    <p class="mono-note">about 5 minutes if you mostly tap, plus a minute for each study you played. answers autosave in this browser as you type, and everything, including your log file if you attach one, comes straight to me when you hit <strong>send</strong>. no account, no login. one ask: write about the session you <em>just</em> played, not last week's.</p>
   </section>
 
   <form id="report-form" action="https://formsubmit.co/dromi@vibrur.is" method="POST" enctype="multipart/form-data" autocomplete="off">
@@ -241,8 +241,8 @@
     </div>
   </section>
 
-  <section class="reveal on" data-sec="The day, the money, the night">
-    <h2 class="sec-label" data-index="04">The day, the money, the night <span class="sec-time">~1 min</span></h2>
+  <section class="reveal on" data-sec="How far you got">
+    <h2 class="sec-label" data-index="04">How far you got <span class="sec-time">~1 min per study</span></h2>
 
     <div class="q" data-label="What day did you reach this session?">
       <span class="q-label" id="lbl-day">What day did you reach this session?</span>
@@ -254,11 +254,50 @@
         <label><input type="radio" name="day_reached" value="day 5"><span>day 5</span></label>
         <label><input type="radio" name="day_reached" value="day 6"><span>day 6</span></label>
         <label><input type="radio" name="day_reached" value="day 7"><span>day 7</span></label>
-        <label><input type="radio" name="day_reached" value="day 8 or later"><span>day 8+</span></label>
+        <label><input type="radio" name="day_reached" value="day 8"><span>day 8</span></label>
+        <label><input type="radio" name="day_reached" value="day 9"><span>day 9</span></label>
+        <label><input type="radio" name="day_reached" value="day 10"><span>day 10</span></label>
+        <label><input type="radio" name="day_reached" value="day 11"><span>day 11</span></label>
+        <label><input type="radio" name="day_reached" value="day 12"><span>day 12</span></label>
+        <label><input type="radio" name="day_reached" value="day 13"><span>day 13</span></label>
+        <label><input type="radio" name="day_reached" value="day 14"><span>day 14</span></label>
         <label><input type="radio" name="day_reached" value="not sure"><span>not sure</span></label>
       </div>
-      <span class="hint">the day you ended on. if you continued from an earlier save, that still counts</span>
+      <span class="hint">the day you ended on. if you continued from an earlier save, that still counts. every study up to that day shows up below.</span>
     </div>
+
+    <div class="q" data-label="How did the session end?">
+      <span class="q-label" id="lbl-ended">How did the session end?</span>
+      <div class="choices" role="radiogroup" aria-labelledby="lbl-ended">
+        <label><input type="radio" name="session_end" value="we stopped on purpose"><span>we stopped on purpose</span></label>
+        <label><input type="radio" name="session_end" value="a bug or crash ended it"><span>a bug or crash ended it</span></label>
+        <label><input type="radio" name="session_end" value="I'd had enough"><span>I'd had enough</span></label>
+        <label><input type="radio" name="session_end" value="ran out of time"><span>ran out of time</span></label>
+        <label><input type="radio" name="session_end" value="not sure"><span>not sure</span></label>
+      </div>
+    </div>
+
+    <div class="q" data-show-when="session_end=a bug or crash ended it|I'd had enough">
+      <label class="q-label" for="q-endwhat">What happened right at the end?</label>
+      <textarea id="q-endwhat" name="session_end_detail"></textarea>
+    </div>
+
+    <h3 class="sub-h">The studies</h3>
+    <p class="mono-note" id="studies-empty">pick the day you reached above, and a card for every study up to it appears here.</p>
+
+    <div id="studies-block">
+      <p class="mono-note">one card per study. tap <strong>played it</strong> to open its questions, and skip anything you don't remember. a low score with a sentence of why is the most useful thing on this page.</p>
+      <div id="study-cards"></div>
+      <div id="study-picks"></div>
+    </div>
+  </section>
+
+  <section class="reveal on" data-sec="The mechanics">
+    <h2 class="sec-label" data-index="05">The mechanics <span class="sec-time">~1 min</span></h2>
+
+    <p class="mono-note">how much each one added to the game for you. 1 = I'd cut it, 5 = the best part. tap <strong>didn't use it</strong> if it never came up.</p>
+
+    <div id="mechanic-rows"></div>
 
     <div class="q" data-label="The chores: worth doing?">
       <span class="q-label" id="lbl-chores">The chores: worth doing?</span>
@@ -277,27 +316,22 @@
       <span class="hint">list them one by one if you can. "bought the tripwire, couldn't place it anywhere" is worth more to me than anything else on this page.</span>
     </div>
 
-    <div class="q" data-label="How did the session end?">
-      <span class="q-label" id="lbl-ended">How did the session end?</span>
-      <div class="choices" role="radiogroup" aria-labelledby="lbl-ended">
-        <label><input type="radio" name="session_end" value="we stopped on purpose"><span>we stopped on purpose</span></label>
-        <label><input type="radio" name="session_end" value="a bug or crash ended it"><span>a bug or crash ended it</span></label>
-        <label><input type="radio" name="session_end" value="I'd had enough"><span>I'd had enough</span></label>
-        <label><input type="radio" name="session_end" value="ran out of time"><span>ran out of time</span></label>
-        <label><input type="radio" name="session_end" value="not sure"><span>not sure</span></label>
-      </div>
+    <div class="q">
+      <label class="q-label" for="q-mechcut">Which mechanic would you cut, and which do you want more of?</label>
+      <textarea id="q-mechcut" name="mechanics_cut_or_more"></textarea>
+      <span class="hint">and why. "the flashlight, it's the only thing I used all night" tells me plenty.</span>
     </div>
 
-    <div class="q" data-show-when="session_end=a bug or crash ended it|I'd had enough">
-      <label class="q-label" for="q-endwhat">What happened right at the end?</label>
-      <textarea id="q-endwhat" name="session_end_detail"></textarea>
+    <div class="q">
+      <label class="q-label" for="q-mechother">Anything else the game does that isn't on this list, good or bad?</label>
+      <textarea id="q-mechother" name="mechanics_other"></textarea>
     </div>
   </section>
 
   <p class="mono-note milestone">halfway, and even a half-filled report is worth sending. the send button works from anywhere.</p>
 
   <section class="reveal on" data-sec="Playing together">
-    <h2 class="sec-label" data-index="05">Playing together <span class="sec-time">~45 sec</span></h2>
+    <h2 class="sec-label" data-index="06">Playing together <span class="sec-time">~45 sec</span></h2>
 
     <div class="q" data-label="Voice chat…">
       <span class="q-label" id="lbl-voice">Voice chat…</span>
@@ -338,7 +372,7 @@
   </section>
 
   <section class="reveal on" data-sec="Fear and feel">
-    <h2 class="sec-label" data-index="06">Fear &amp; feel <span class="sec-time">~45 sec</span></h2>
+    <h2 class="sec-label" data-index="07">Fear &amp; feel <span class="sec-time">~45 sec</span></h2>
 
     <div class="q">
       <label class="q-label" for="q-scariest">Scariest or tensest moment of this session?</label>
@@ -383,7 +417,7 @@
   </section>
 
   <section class="reveal on" data-sec="What broke">
-    <h2 class="sec-label" data-index="07">What broke <span class="sec-time">~1 min</span></h2>
+    <h2 class="sec-label" data-index="08">What broke <span class="sec-time">~1 min</span></h2>
 
     <div class="callout">
       <p class="mono-note">this session only, please. if it's been broken for weeks, or you already sent it to me, leave it out. that's how I tell what's still broken from what I've already fixed.</p>
@@ -425,7 +459,7 @@
   </section>
 
   <section class="reveal on" data-sec="Verdict">
-    <h2 class="sec-label" data-index="08">Verdict <span class="sec-time">~1 min</span></h2>
+    <h2 class="sec-label" data-index="09">Verdict <span class="sec-time">~1 min</span></h2>
 
     <div class="q" data-label="Fun (1 = a chore, 5 = lost track of time)">
       <span class="q-label" id="lbl-fun">Fun <span class="hint-inline">1 = a chore, 5 = lost track of time</span></span>
@@ -489,7 +523,7 @@
   </section>
 
   <section class="reveal on">
-    <h2 class="sec-label" data-index="09">Your logs, optional but gold <span class="sec-time">~30 sec</span></h2>
+    <h2 class="sec-label" data-index="10">Your logs, optional but gold <span class="sec-time">~30 sec</span></h2>
     <p>Your game wrote a log file while you played. It tells me exactly what went wrong on your machine, and attaching it is the single most useful thing you can do. It rides along with this form, no separate email:</p>
     <ol class="steps">
       <li>Click <strong>Choose file</strong> below.</li>
@@ -504,7 +538,7 @@
   </section>
 
   <section class="reveal on send-section">
-    <h2 class="sec-label" data-index="10">Send</h2>
+    <h2 class="sec-label" data-index="11">Send</h2>
     <p class="mono-note"><span id="answer-count"></span></p>
     <div class="report-actions">
       <button type="submit" class="support-btn" id="btn-send">send my report</button>

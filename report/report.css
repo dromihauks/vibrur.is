@@ -129,6 +129,70 @@
   margin: 0 0 0.45rem;
 }
 
+/* chip labels are display:flex, which beats the hidden attribute on its own */
+.report [hidden] { display: none !important; }
+
+/* ---- study cards ----
+   One card per study the tester reached. "played it" opens the
+   body; everything else stays folded so skipped studies cost a tap. */
+
+.sub-h {
+  font-size: 1rem;
+  font-weight: normal;
+  color: var(--ink);
+  margin: 3.2rem 0 0.6rem;
+}
+
+.study {
+  border: 1px solid var(--line);
+  background: rgba(255, 255, 255, 0.18);
+  padding: 1.1rem 1.1rem 1.25rem;
+  margin-bottom: 1.2rem;
+}
+
+.study-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.3rem 0.8rem;
+  margin: 0 0 1rem;
+}
+
+.study-day {
+  font-family: var(--mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.14em;
+  text-transform: lowercase;
+  color: var(--faint);
+}
+
+.study-name {
+  color: var(--ink);
+  font-size: 1.05rem;
+}
+
+.study-note {
+  flex-basis: 100%;
+  font-family: var(--mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.1em;
+  color: var(--dim);
+}
+
+.study-body {
+  margin-top: 1.15rem;
+  padding-top: 1.15rem;
+  border-top: 1px dashed var(--line);
+}
+
+.study .subq { margin-bottom: 1.15rem; }
+.study .subq:last-child { margin-bottom: 0; }
+.study textarea { min-height: 4.5rem; }
+
+/* mechanics rows sit tighter than regular questions */
+.q.mech { margin-bottom: 1.5rem; }
+.q.mech .q-label { margin-bottom: 0.5rem; }
+
 /* ---- callout ---- */
 
 .callout {

@@ -31,6 +31,212 @@
 
   if (!form) return;
 
+  /* ---- the campaign calendar ---------------------------------
+     One row per day that runs a study. Keep in step with the game's
+     calendar (UBTTaskManager: WeeklyTaskList for days 1 to 7,
+     EnsureDefaultAbsoluteOverrides for 8 to 14). Names are what the
+     game shows; notes jog the tester's memory. Day 10 has no study.
+     The day number is part of every field name (study_d3_fun), so
+     moving a study to another day starts its answers fresh. */
+
+  var LAST_DAY = 14;
+
+  var STUDIES = [
+    { day: 1,  name: "Orientation",
+      note: "the first morning, answering the questions" },
+    { day: 2,  name: "Auditory Resonance Trial",
+      note: "the study room: sit, listen, respond to the tones and voices" },
+    { day: 3,  name: "The Count",
+      note: "one of you counts at the post with eyes shut, the rest hide in the dark" },
+    { day: 4,  name: "Auditory Resonance Trial, second sitting",
+      note: "the harder one, where some voices should not be answered" },
+    { day: 5,  name: "Hand in Hand",
+      note: "paired up, holding hands" },
+    { day: 6,  name: "Systems malfunction",
+      note: "studies cancelled, and something was loose in daylight" },
+    { day: 7,  name: "The Exit Interview",
+      note: "the end of week one" },
+    { day: 8,  name: "Object Permanence",
+      note: "hide and seek" },
+    { day: 9,  name: "Auditory Resonance Trial, third sitting",
+      note: "back in the study room" },
+    { day: 11, name: "Provision Study",
+      note: "the vault, and the bank run after dark" },
+    { day: 12, name: "Hand Link Screening",
+      note: "one of you was the carrier, and it spread through held hands" },
+    { day: 13, name: "The Call",
+      note: "one blind caller, everyone else has to answer" },
+    { day: 14, name: "Retrieval Exercise",
+      note: "someone was taken, and you went back for them" }
+  ];
+
+  var MECHANICS = [
+    { id: "stalker",      name: "The stalker",       note: "whatever hunts you at night" },
+    { id: "eyes_closed",  name: "Closing your eyes", note: "what you can sense with them shut" },
+    { id: "hand_holding", name: "Holding hands" },
+    { id: "voice",        name: "Proximity voice",   note: "hearing each other by distance and through walls" },
+    { id: "flashlight",   name: "The flashlight" },
+    { id: "chores",       name: "Chores" },
+    { id: "shop",         name: "The shop and money" },
+    { id: "injection",    name: "The daily injection", note: "at the vitals scale" }
+  ];
+
+  var PLAYED_YES = "played it";
+  var PLAYED_BROKE = "it didn't start, or it broke";
+  var PLAYED = [PLAYED_YES, PLAYED_BROKE, "missed or skipped it", "don't remember it"];
+  var FELT = ["tense", "scary", "funny", "clever", "social", "chaotic",
+    "confusing", "boring", "unfair", "too long", "too short"];
+  var SCALE = ["1", "2", "3", "4", "5"];
+
+  /* ---- building the study cards + mechanic rows --------------
+     Generated here rather than written out in the HTML (13 cards of
+     identical markup), and BEFORE restore() so saved answers land on
+     real fields. Visibility reuses data-show-when, so the counter,
+     export and autosave treat them like any hand-written question. */
+
+  function dayRule(fromDay) {
+    var vals = [];
+    for (var d = fromDay; d <= LAST_DAY; d++) vals.push("day " + d);
+    vals.push("not sure");
+    return "day_reached=" + vals.join("|");
+  }
+
+  function node(tag, cls, text) {
+    var n = document.createElement(tag);
+    if (cls) n.className = cls;
+    if (text != null) n.textContent = text;
+    return n;
+  }
+
+  // opts are plain strings, or [value, shown] pairs when they differ
+  function chipRow(name, opts, labelId, kind, extraCls) {
+    var row = node("div", "choices" + (extraCls ? " " + extraCls : ""));
+    row.setAttribute("role", kind === "checkbox" ? "group" : "radiogroup");
+    row.setAttribute("aria-labelledby", labelId);
+    opts.forEach(function (o) {
+      var lab = node("label");
+      var inp = document.createElement("input");
+      inp.type = kind || "radio";
+      inp.name = name;
+      inp.value = Array.isArray(o) ? o[0] : o;
+      lab.appendChild(inp);
+      lab.appendChild(node("span", null, Array.isArray(o) ? o[1] : o));
+      row.appendChild(lab);
+    });
+    return row;
+  }
+
+  function chipSubq(shown, exported, name, opts, kind, extraCls) {
+    var s = node("div", "subq");
+    s.setAttribute("data-label", exported);
+    var l = node("span", "subq-label", shown);
+    l.id = "lbl-" + name;
+    s.appendChild(l);
+    s.appendChild(chipRow(name, opts, l.id, kind, extraCls));
+    return s;
+  }
+
+  function textSubq(shown, exported, name) {
+    var s = node("div", "subq");
+    s.setAttribute("data-label", exported);
+    var l = node("label", "subq-label", shown);
+    l.htmlFor = "q-" + name;
+    var t = document.createElement("textarea");
+    t.id = "q-" + name;
+    t.name = name;
+    s.appendChild(l);
+    s.appendChild(t);
+    return s;
+  }
+
+  function buildStudies() {
+    var host = document.getElementById("study-cards");
+    var block = document.getElementById("studies-block");
+    if (!host || !block) return;
+    block.setAttribute("data-show-when", dayRule(1));
+
+    STUDIES.forEach(function (st) {
+      var key = "study_d" + st.day;
+      var tag = "Day " + st.day + " · " + st.name + " · ";
+
+      var card = node("div", "q study");
+      card.setAttribute("data-show-when", dayRule(st.day));
+
+      var head = node("div", "study-head");
+      head.appendChild(node("span", "study-day", "day " + st.day));
+      head.appendChild(node("span", "study-name", st.name));
+      if (st.note) head.appendChild(node("span", "study-note", st.note));
+      card.appendChild(head);
+
+      card.appendChild(chipSubq("did you play it?", tag + "played it?",
+        key + "_played", PLAYED));
+
+      var broke = textSubq("what happened, and where did it stop?",
+        tag + "what went wrong", key + "_broke");
+      broke.setAttribute("data-show-when", key + "_played=" + PLAYED_BROKE);
+      card.appendChild(broke);
+
+      var body = node("div", "study-body");
+      body.setAttribute("data-show-when", key + "_played=" + PLAYED_YES);
+      body.appendChild(chipSubq("fun · 1 = a chore, 5 = best part of the game",
+        tag + "fun (1 = a chore, 5 = best part of the game)", key + "_fun", SCALE, "radio", "scale"));
+      body.appendChild(chipSubq("it felt… (tick all that fit)",
+        tag + "it felt", key + "_felt", FELT, "checkbox", "ticks"));
+      body.appendChild(chipSubq("did you understand what to do?",
+        tag + "understood what to do?", key + "_understood",
+        ["right away", "after a while", "never really"]));
+      body.appendChild(chipSubq("this study should…",
+        tag + "this study should", key + "_verdict",
+        ["stay as it is", "stay, but change", "be cut"]));
+      body.appendChild(textSubq("what was fun about it, and how did it make you feel?",
+        tag + "what was fun, how it felt", key + "_fun_why"));
+      body.appendChild(textSubq("what would make it better?",
+        tag + "what would make it better", key + "_improve"));
+      card.appendChild(body);
+
+      host.appendChild(card);
+    });
+
+    // best + weakest: each option only shows once its day is reached
+    var picks = document.getElementById("study-picks");
+    if (!picks) return;
+    [["best_study", "Best study you played"],
+     ["weakest_study", "Weakest study you played"]].forEach(function (p) {
+      var q = node("div", "q");
+      q.setAttribute("data-label", p[1]);
+      var l = node("span", "q-label", p[1]);
+      l.id = "lbl-" + p[0];
+      q.appendChild(l);
+      var row = chipRow(p[0], STUDIES.map(function (st) {
+        return ["day " + st.day + " · " + st.name, st.name];
+      }), l.id, "radio");
+      row.querySelectorAll("label").forEach(function (lab, i) {
+        lab.setAttribute("data-show-when", dayRule(STUDIES[i].day));
+      });
+      q.appendChild(row);
+      picks.appendChild(q);
+    });
+  }
+
+  function buildMechanics() {
+    var host = document.getElementById("mechanic-rows");
+    if (!host) return;
+    MECHANICS.forEach(function (m) {
+      var name = "mechanic_" + m.id;
+      var q = node("div", "q mech");
+      q.setAttribute("data-label", m.name + " (1 = I'd cut it, 5 = the best part)");
+      var l = node("span", "q-label", m.name);
+      l.id = "lbl-" + name;
+      if (m.note) {
+        l.appendChild(document.createTextNode(" "));
+        l.appendChild(node("span", "hint-inline", m.note));
+      }
+      q.appendChild(l);
+      q.appendChild(chipRow(name, SCALE.concat(["didn't use it"]), l.id, "radio", "scale"));
+      host.appendChild(q);
+    });
+  }
+
   /* ---- collect / restore (text + radio + checkbox) ---------- */
 
   function savableFields() {
@@ -95,7 +301,14 @@
       var wanted = rule.slice(eq + 1).split("|");
       var checked = form.querySelector('input[name="' + name + '"]:checked');
       el.hidden = !(checked && wanted.indexOf(checked.value) !== -1);
+      // a hidden chip (best/weakest study past the day reached) can't stay picked
+      if (el.hidden && el.tagName === "LABEL") {
+        var inp = el.querySelector("input");
+        if (inp) inp.checked = false;
+      }
     });
+    var empty = document.getElementById("studies-empty");
+    if (empty) empty.hidden = !!form.querySelector('input[name="day_reached"]:checked');
   }
 
   /* "none of these" clears the other ticks, and vice versa */
@@ -129,7 +342,8 @@
     sec.querySelectorAll(".q").forEach(function (q) {
       if (!isVisible(q)) return;
       var subs = q.querySelectorAll(".subq");
-      if (subs.length) subs.forEach(function (s) { out.push(s); });
+      // study cards fold subqs away, so a folded one must not export stale text
+      if (subs.length) subs.forEach(function (s) { if (isVisible(s)) out.push(s); });
       else out.push(q);
     });
     return out;
@@ -394,6 +608,8 @@
 
   /* ---- init ------------------------------------------------- */
 
+  buildStudies();
+  buildMechanics();
   fillBrowserContext();
   restore();
   applyConds();
