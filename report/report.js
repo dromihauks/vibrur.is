@@ -37,7 +37,10 @@
      EnsureDefaultAbsoluteOverrides for 8 to 14). Names are what the
      game shows; notes jog the tester's memory. Day 10 has no study.
      The day number is part of every field name (study_d3_fun), so
-     moving a study to another day starts its answers fresh. */
+     moving a study to another day starts its answers fresh. A study
+     that replaces another on the same day gets its own id so it
+     doesn't inherit the old one's saved answers. Day 7 runs two:
+     the Integration Trial at 10:00, then the Exit Interview. */
 
   var LAST_DAY = 14;
 
@@ -46,16 +49,18 @@
       note: "the first morning, answering the questions" },
     { day: 2,  name: "Auditory Resonance Trial",
       note: "the study room: sit, listen, respond to the tones and voices" },
-    { day: 3,  name: "The Count",
-      note: "one of you counts at the post with eyes shut, the rest hide in the dark" },
+    { day: 3,  id: "d3_recall", name: "Recall Trial",
+      note: "the study room again: a row of coloured tones, repeat them in order" },
     { day: 4,  name: "Hand in Hand",
       note: "paired up, holding hands" },
     { day: 5,  name: "Auditory Resonance Trial, second sitting",
       note: "the harder one, where some voices should not be answered" },
     { day: 6,  name: "Systems malfunction",
       note: "studies cancelled, and something was loose in daylight" },
+    { day: 7,  id: "d7_integration", name: "Integration Trial",
+      note: "the morning sitting: tones and colour rows mixed together" },
     { day: 7,  name: "The Exit Interview",
-      note: "the end of week one" },
+      note: "the afternoon: your file read back, the vote, the certificates" },
     { day: 8,  name: "Object Permanence",
       note: "hide and seek" },
     { day: 9,  name: "Auditory Resonance Trial, third sitting",
@@ -78,7 +83,13 @@
     { id: "flashlight",   name: "The flashlight" },
     { id: "chores",       name: "Chores" },
     { id: "shop",         name: "The shop and money" },
-    { id: "injection",    name: "The daily injection", note: "at the vitals scale" }
+    { id: "injection",    name: "The daily injection", note: "at the vitals scale" },
+    { id: "vote",         name: "The vote at the post", note: "picking who leads, and the private arrangements" },
+    { id: "phone",        name: "The house phone",   note: "calling each other, and the calls nobody made" },
+    { id: "delivery",     name: "Porch deliveries",  note: "shop orders arriving in boxes" },
+    { id: "power",        name: "Power and the breaker", note: "the panel, the generator, the lights going out" },
+    { id: "camera",       name: "The camera",        note: "photos, focus, the wall of prints" },
+    { id: "nightmare",    name: "Nightmares",        note: "the sleep paralysis at night" }
   ];
 
   var PLAYED_YES = "played it";
@@ -156,7 +167,7 @@
     block.setAttribute("data-show-when", dayRule(1));
 
     STUDIES.forEach(function (st) {
-      var key = "study_d" + st.day;
+      var key = "study_" + (st.id || "d" + st.day);
       var tag = "Day " + st.day + " · " + st.name + " · ";
 
       var card = node("div", "q study");
