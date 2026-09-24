@@ -14,9 +14,8 @@
 
   var STORAGE_KEY = "bt-playtest-report-v1";
   var MAX_BYTES = 10 * 1024 * 1024; // FormSubmit free tier: 10 MB total
-  var ATTACH_IDLE_TEXT = "screenshots of bugs are welcome here too. " +
-    "up to 10 MB total. bigger than that? email it to dromi@vibrur.is " +
-    "instead; the rest still sends.";
+  var ATTACH_IDLE_TEXT = "Screenshots are welcome too. Up to 10 MB in total. " +
+    "Bigger files can go to dromi@vibrur.is.";
 
   var form = document.getElementById("report-form");
   var countEl = document.getElementById("answer-count");
@@ -382,8 +381,8 @@
       });
     });
     if (countEl) {
-      countEl.textContent = "answered " + answered + " of " + total +
-        ". every one helps, only your name and build number are required";
+      countEl.textContent = "Answered " + answered + " of " + total +
+        ". Only your name and build number are required.";
     }
     if (pillFill) {
       pillFill.style.width = (total ? Math.round(100 * answered / total) : 0) + "%";
@@ -418,15 +417,15 @@
     if (!attachHint) return true;
     var bytes = totalFileBytes();
     if (bytes > MAX_BYTES) {
-      attachHint.textContent = "that's " + fmtMB(bytes) +
-        ", over the 10 MB limit. attach just the newest BetterTogether.log, " +
-        "or email the big file to dromi@vibrur.is. (your answers will still send.)";
+      attachHint.textContent = "That's " + fmtMB(bytes) +
+        ", over the 10 MB limit. Attach only the newest BetterTogether.log, " +
+        "or email the big file to dromi@vibrur.is.";
       attachHint.classList.add("attach-over");
       return false;
     }
     attachHint.classList.remove("attach-over");
     attachHint.textContent = bytes > 0
-      ? "attached " + fmtMB(bytes) + ", good to go."
+      ? "Attached " + fmtMB(bytes) + ". Good to go."
       : ATTACH_IDLE_TEXT;
     return true;
   }
@@ -568,7 +567,7 @@
     if (!checkFiles()) {
       e.preventDefault();
       if (sendStatus) {
-        sendStatus.textContent = "please shrink or remove the attachment first (or email it separately), then hit send again.";
+        sendStatus.textContent = "Remove or shrink the attachment first, then press send again.";
         sendStatus.classList.add("attach-over");
       }
       if (fileInput) fileInput.scrollIntoView({ behavior: "smooth", block: "center" });
@@ -615,7 +614,7 @@
 
     // let it submit natively to FormSubmit; keep answers in storage as a
     // safety net in case the network hiccups (cleared via the clear button).
-    if (sendStatus) sendStatus.textContent = "sending…";
+    if (sendStatus) sendStatus.textContent = "Sending…";
   });
 
   // back from the thanks page (bfcache): the boxes the submit held out are the player's again
@@ -628,7 +627,7 @@
     btnDownload.addEventListener("click", function () {
       downloadReport();
       if (sendStatus) {
-        sendStatus.textContent = "saved a .txt copy of your answers to your downloads folder.";
+        sendStatus.textContent = "Saved a .txt copy of your answers to your Downloads folder.";
       }
     });
   }

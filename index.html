@@ -6,20 +6,24 @@
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <title>Víbrur Games</title>
-<meta name="description" content="Víbrur Games is an independent game development team based in Reykjavík, Iceland, currently working on a TBA psychological multiplayer horror game.">
-<meta name="theme-color" content="#a3bdd4">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect width='16' height='16' fill='%23a3bdd4'/%3E%3Ccircle cx='8' cy='8' r='2' fill='%23f6fafc'/%3E%3C/svg%3E">
-<link rel="stylesheet" href="styles.css">
+<meta name="description" content="Víbrur Games is an independent game development team based in Reykjavík, Iceland, making Better Together, a 2 to 6 player co-op psychological horror.">
+<meta name="theme-color" content="#0a0a0a">
+<meta name="color-scheme" content="dark">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect width='16' height='16' fill='%230a0a0a'/%3E%3Ccircle cx='8' cy='8' r='5' fill='none' stroke='%23ededeb' stroke-width='1.6'/%3E%3Ccircle cx='8' cy='8' r='1.8' fill='%23ef1d20'/%3E%3C/svg%3E">
+<link rel="preload" href="/fonts/superglue.otf" as="font" type="font/otf" crossorigin>
+<link rel="stylesheet" href="/styles.css">
 <link rel="canonical" href="https://vibrur.is/">
 
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Víbrur Games">
 <meta property="og:title" content="Víbrur Games">
-<meta property="og:description" content="An independent game development team based in Reykjavík, Iceland, currently working on a TBA psychological multiplayer horror game.">
+<meta property="og:description" content="An independent game development team based in Reykjavík, Iceland. Making Better Together, a 2 to 6 player co-op psychological horror.">
 <meta property="og:url" content="https://vibrur.is/">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Víbrur Games">
-<meta name="twitter:description" content="An independent game development team based in Reykjavík, Iceland, currently working on a TBA psychological multiplayer horror game.">
+<meta property="og:image" content="https://vibrur.is/better-together/share.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Better Together logo over three friends with torches on a suburban street at night">
+<meta name="twitter:card" content="summary_large_image">
 
 <script type="application/ld+json">
 {
@@ -28,7 +32,8 @@
   "name": "Víbrur Games",
   "alternateName": "Drómi",
   "url": "https://vibrur.is/",
-  "description": "An independent game development team based in Reykjavík, Iceland, currently working on a TBA psychological multiplayer horror game.",
+  "email": "dromi@vibrur.is",
+  "description": "An independent game development team based in Reykjavík, Iceland.",
   "address": {
     "@type": "PostalAddress",
     "addressLocality": "Reykjavík",
@@ -48,73 +53,47 @@
 </head>
 <body>
 
-<div id="light" aria-hidden="true"></div>
-<canvas id="motes" aria-hidden="true"></canvas>
-<div id="grain" aria-hidden="true"></div>
-<div id="cloud" aria-hidden="true"></div>
-
-<nav>
-  <a class="wordmark" href="#top">Víbrur</a>
-  <div class="links">
-    <a href="#about">about</a>
-    <a href="#team">team</a>
-    <a href="#projects">projects</a>
-    <a href="support.html">support</a>
-  </div>
-</nav>
-
-<header class="hero" id="top">
-  <h1 aria-label="Víbrur Games"><span>V</span><span>Í</span><span>B</span><span>R</span><span>U</span><span>R</span>&nbsp;&nbsp;<span>G</span><span>A</span><span>M</span><span>E</span><span>S</span></h1>
-  <div class="beacon-row">
-    <div class="beacon" aria-hidden="true"></div>
-    <!-- TODO(you): confirm or replace this word -->
-    <div class="soon">soon</div>
-  </div>
-  <div class="scrollcue" aria-hidden="true"></div>
+<header class="top wrap">
+  <h1 class="wordmark">Víbrur Games</h1>
+  <nav aria-label="Main">
+    <a class="tab" href="/better-together/">Better Together</a>
+    <a href="#team">Team</a>
+    <a href="#contact">Contact</a>
+  </nav>
 </header>
 
-<main>
+<main class="wrap">
 
-  <section id="about" class="reveal">
-    <h2 class="sec-label" data-index="01">About</h2>
-    <p>An independent game development team based in Reykjavík, Iceland.</p>
-    <p>Currently working on a TBA psychological multiplayer horror game.</p>
-    <p>Stay tuned for more updates.</p>
-  </section>
-
-  <section id="team" class="reveal">
-    <h2 class="sec-label" data-index="02">Team</h2>
-    <!-- Members are defined in site.js → CONFIG.team.
-         Drop photos into a /team folder and reference them there. -->
-    <div class="team-grid" id="team-grid"></div>
-  </section>
-
-  <section id="projects" class="reveal">
-    <h2 class="sec-label" data-index="03">Projects</h2>
-    <div class="project-empty">
-      <span class="idx">001</span>
-      <span class="tba">TBA</span>
-      <div class="shimmer" aria-hidden="true"></div>
+  <section class="game-card">
+    <a href="/better-together/"><img src="/better-together/capsule.jpg" width="1232" height="706" alt="Better Together logo over three friends with torches on a suburban street at night"></a>
+    <h2><a href="/better-together/">Better Together</a></h2>
+    <p>A 2 to 6 player co-op psychological horror.</p>
+    <div class="links">
+      <span class="btn soon">Coming Soon</span>
+      <a href="/better-together/">About the game</a>
     </div>
+  </section>
+
+  <section id="team">
+    <h2>Team</h2>
+    <ul class="people">
+      <li><span>Drómi Hauksson</span> <span class="role">Executive Founder, Game Director</span></li>
+      <li><span>Hrafnar</span> <span class="role">Art Director</span></li>
+      <li><span>Greta Kudabaite</span> <span class="role">Executive, QA &amp; Culture Lead</span></li>
+      <li><span>Magnús Jóhann Ragnarsson</span> <span class="role">Music Composer</span></li>
+    </ul>
   </section>
 
 </main>
 
-<footer>
-  <div class="col">
-    <a href="mailto:dromi@vibrur.is">dromi@vibrur.is</a>
-    <span>&copy; 2026 Víbrur Games</span>
-    <a href="/privacy-policy/">privacy</a>
-  </div>
-  <div class="col">
-    <a data-social="instagram">instagram</a>
-    <a data-social="tiktok">tiktok</a>
-  </div>
-  <div class="col">
-    <span id="clock"></span>
+<footer class="wrap" id="contact">
+  <div class="foot">
+    <h2>Contact</h2>
+    <p><a href="mailto:dromi@vibrur.is">dromi@vibrur.is</a></p>
+    <p><a href="https://www.instagram.com/vibrur" rel="noreferrer">Instagram</a> · <a href="https://www.tiktok.com/@vibrur" rel="noreferrer">TikTok</a></p>
+    <p class="small">&copy; 2026 Víbrur Games · <a href="/privacy-policy/">Privacy</a></p>
   </div>
 </footer>
 
-<script src="site.js"></script>
 </body>
 </html>

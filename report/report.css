@@ -1,71 +1,84 @@
-/* Víbrur Games playtest report page */
+/* playtest report page. tokens come from /styles.css */
 
-.report {
-  padding-top: 18vh;
-  max-width: 40rem;
-}
+.report > h1 + section,
+.report section,
+.report .milestone { max-width: 44rem; }
 
-.report section { padding: 4.5rem 0 1rem; }
-.report section:first-of-type { padding-top: 0; }
+.report section { padding: 2.75rem 0 1rem; }
 
 .report .mono-note {
-  font-family: var(--mono);
-  font-size: 0.66rem;
-  letter-spacing: 0.12em;
-  line-height: 2;
+  font-size: 0.85rem;
+  line-height: 1.7;
   color: var(--dim);
 }
 
-.report .mono-note code {
-  font-size: 1em;
-  letter-spacing: 0.06em;
-  background: rgba(255, 255, 255, 0.4);
+.report code {
+  font: inherit;
+  font-size: 0.85rem;
+  background: var(--panel);
   border: 1px solid var(--line);
-  padding: 0.15em 0.5em;
+  padding: 0.1em 0.45em;
   word-break: break-all;
+}
+
+/* ---- section titles: number, name, time ---- */
+
+.sec-label {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.25rem 0.9rem;
+  margin: 0 0 2rem;
+}
+
+.sec-label::before {
+  content: attr(data-index);
+  font-family: var(--mono);
+  font-size: 0.85rem;
+  color: var(--accent);
+}
+
+.sec-label .sec-time {
+  font-family: var(--mono);
+  font-size: 0.8rem;
+  color: var(--faint);
+  white-space: nowrap;
 }
 
 /* ---- questions ---- */
 
-.q { margin: 0 0 2.4rem; }
+.q { margin: 0 0 2.25rem; }
 
 .q-label {
   display: block;
   color: var(--ink);
-  margin: 0 0 0.75rem;
+  margin: 0 0 0.7rem;
 }
 
 .q-label .req,
 .hint-inline {
-  font-family: var(--mono);
-  font-size: 0.62rem;
-  letter-spacing: 0.12em;
-  text-transform: lowercase;
+  font-size: 0.8rem;
   color: var(--faint);
 }
 
 .q .hint {
   display: block;
-  font-family: var(--mono);
-  font-size: 0.62rem;
-  letter-spacing: 0.12em;
+  font-size: 0.8rem;
+  line-height: 1.6;
   color: var(--faint);
-  margin-top: 0.45rem;
+  margin-top: 0.5rem;
 }
 
 .q input[type="text"],
 .q textarea {
   width: 100%;
-  background: rgba(255, 255, 255, 0.35);
+  font: inherit;
+  color: var(--ink);
+  background: var(--panel);
   border: 1px solid var(--line);
   border-radius: 0;
-  color: var(--ink);
-  font-family: var(--serif);
-  font-size: 1rem;
-  line-height: 1.6;
-  padding: 0.7rem 0.9rem;
+  padding: 0.65rem 0.8rem;
   outline: none;
-  transition: border-color 0.4s ease, background 0.4s ease;
 }
 
 .q textarea {
@@ -73,142 +86,107 @@
   resize: vertical;
 }
 
+.q input[type="text"]:focus,
+.q textarea:focus {
+  border-color: var(--ink);
+  background: var(--panel-2);
+}
+
 .q input[type="file"] {
   width: 100%;
-  background: rgba(255, 255, 255, 0.35);
-  border: 1px solid var(--line);
+  font: inherit;
+  font-size: 0.85rem;
   color: var(--dim);
-  font-family: var(--mono);
-  font-size: 0.7rem;
-  letter-spacing: 0.06em;
-  padding: 0.7rem 0.9rem;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  padding: 0.65rem 0.8rem;
   cursor: pointer;
 }
 
 .q input[type="file"]::file-selector-button {
-  font-family: var(--mono);
-  font-size: 0.64rem;
-  letter-spacing: 0.14em;
-  text-transform: lowercase;
+  font: inherit;
   color: var(--ink);
-  background: rgba(255, 255, 255, 0.5);
-  border: 1px solid var(--faint);
-  padding: 0.45rem 1rem;
+  background: none;
+  border: 1px solid var(--line-strong);
+  padding: 0.35rem 0.9rem;
   margin-right: 1rem;
   cursor: pointer;
-  transition: border-color 0.4s ease, background 0.4s ease;
 }
 
 .q input[type="file"]::file-selector-button:hover {
-  border-color: var(--ink);
-  background: rgba(255, 255, 255, 0.7);
+  background: var(--ink);
+  color: var(--bg);
 }
 
-.attach-over { color: #9c3b28 !important; }
+.attach-over { color: var(--danger) !important; }
 
-.q input[type="text"]:focus,
-.q textarea:focus {
-  border-color: var(--ink);
-  background: rgba(255, 255, 255, 0.55);
-}
+/* several related answers inside one .q */
 
-/* ---- sub-questions ----
-   Several related answers inside one .q, so a block like "your setup"
-   reads as a single question instead of five. */
-
-.subq { margin: 0 0 1.15rem; }
+.subq { margin: 0 0 1.25rem; }
 .subq:last-child { margin-bottom: 0; }
 
 .subq-label {
   display: block;
-  font-family: var(--mono);
-  font-size: 0.62rem;
-  letter-spacing: 0.12em;
-  text-transform: lowercase;
-  color: var(--faint);
+  font-size: 0.85rem;
+  color: var(--dim);
   margin: 0 0 0.45rem;
 }
 
 /* chip labels are display:flex, which beats the hidden attribute on its own */
 .report [hidden] { display: none !important; }
 
-/* ---- study cards ----
-   One card per study the tester reached. "played it" opens the
-   body; everything else stays folded so skipped studies cost a tap. */
+/* ---- study cards ---- */
 
 .sub-h {
-  font-size: 1rem;
-  font-weight: normal;
-  color: var(--ink);
-  margin: 3.2rem 0 0.6rem;
+  font-size: 1.05rem;
+  margin: 3rem 0 0.75rem;
 }
 
 .study {
   border: 1px solid var(--line);
-  background: rgba(255, 255, 255, 0.18);
-  padding: 1.1rem 1.1rem 1.25rem;
-  margin-bottom: 1.2rem;
+  background: var(--panel);
+  padding: 1rem 1rem 1.2rem;
+  margin-bottom: 1rem;
 }
 
 .study-head {
   display: flex;
   flex-wrap: wrap;
   align-items: baseline;
-  gap: 0.3rem 0.8rem;
+  gap: 0.2rem 0.8rem;
   margin: 0 0 1rem;
 }
 
-.study-day {
-  font-family: var(--mono);
-  font-size: 0.6rem;
-  letter-spacing: 0.14em;
-  text-transform: lowercase;
-  color: var(--faint);
-}
-
-.study-name {
-  color: var(--ink);
-  font-size: 1.05rem;
-}
+.study-day { font-size: 0.8rem; color: var(--accent); }
+.study-name { color: var(--ink); }
 
 .study-note {
   flex-basis: 100%;
-  font-family: var(--mono);
-  font-size: 0.62rem;
-  letter-spacing: 0.1em;
+  font-size: 0.8rem;
   color: var(--dim);
 }
 
 .study-body {
-  margin-top: 1.15rem;
-  padding-top: 1.15rem;
+  margin-top: 1.1rem;
+  padding-top: 1.1rem;
   border-top: 1px dashed var(--line);
 }
 
-.study .subq { margin-bottom: 1.15rem; }
-.study .subq:last-child { margin-bottom: 0; }
 .study textarea { min-height: 4.5rem; }
 
 /* mechanics rows sit tighter than regular questions */
 .q.mech { margin-bottom: 1.5rem; }
 .q.mech .q-label { margin-bottom: 0.5rem; }
 
-/* ---- callout ---- */
-
 .callout {
-  border-left: 1px solid var(--faint);
-  padding-left: 1.1rem;
-  margin: 0 0 2.4rem;
+  border-left: 2px solid var(--accent);
+  padding-left: 1rem;
+  margin: 0 0 2.25rem;
 }
 
 .report .callout .mono-note { margin: 0; }
 
-/* ---- honeypot ----
-   Off-screen, never focusable. Lives here rather than in a style
-   attribute because the page's CSP sets style-src 'self', which
-   blocks inline styles; as an attribute it rendered as a visible
-   text box mid-form. */
-
+/* honeypot. lives here, not in a style attribute, because the csp blocks inline styles */
 .honey {
   position: absolute;
   left: -9999px;
@@ -217,54 +195,37 @@
   opacity: 0;
 }
 
-/* ---- section time chips + milestone ---- */
-
-.sec-label .sec-time {
-  font-size: 0.56rem;
-  letter-spacing: 0.14em;
-  text-transform: lowercase;
-  color: var(--faint);
-  white-space: nowrap;
-}
-
 .milestone {
-  text-align: center;
-  margin: 4.5rem 0 -2.5rem;
+  margin: 2rem 0 0;
+  padding: 1rem 0 0;
+  border-top: 1px dashed var(--line);
 }
 
-/* ---- progress pill ----
-   Fixed bottom-right; fills as answers land, flips "saved" after
-   each autosave, and jumps to the send section on click. */
+/* ---- progress pill, fixed bottom right, jumps to send ---- */
 
 .progress-pill {
   position: fixed;
-  right: 1.1rem;
-  bottom: 1.1rem;
-  z-index: 70;
+  right: 1rem;
+  bottom: 1rem;
+  z-index: 10;
   display: flex;
   align-items: center;
   gap: 0.6rem;
   appearance: none;
-  font-family: var(--mono);
-  font-size: 0.6rem;
-  letter-spacing: 0.14em;
-  text-transform: lowercase;
-  color: var(--dim);
-  background: rgba(246, 250, 252, 0.78);
-  border: 1px solid var(--line);
-  padding: 0.5rem 0.85rem;
+  font: inherit;
+  font-size: 0.8rem;
+  color: var(--ink);
+  background: var(--panel);
+  border: 1px solid var(--line-strong);
+  padding: 0.5rem 0.8rem;
   cursor: pointer;
-  transition: border-color 0.4s ease, color 0.4s ease;
 }
 
-.progress-pill:hover {
-  border-color: var(--ink);
-  color: var(--ink);
-}
+.progress-pill:hover { border-color: var(--ink); }
 
 .pp-track {
   width: 64px;
-  height: 2px;
+  height: 3px;
   background: var(--line);
   overflow: hidden;
 }
@@ -273,49 +234,43 @@
   display: block;
   height: 100%;
   width: 0;
-  background: var(--ink);
-  transition: width 0.5s ease;
+  background: var(--accent);
 }
 
 #pp-text { font-variant-numeric: tabular-nums; }
 
-@media (max-width: 540px) {
-  .progress-pill { right: 0.7rem; bottom: 0.7rem; }
+@media (max-width: 40rem) {
+  .progress-pill { right: 0.6rem; bottom: 0.6rem; }
 }
 
-/* ---- choice rows ---- */
+/* ---- choice chips ---- */
 
 .choices {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.5rem;
+  gap: 0.45rem;
 }
 
 .choices label {
   display: flex;
   align-items: center;
   gap: 0.45rem;
-  border: 1px solid var(--line);
-  background: rgba(255, 255, 255, 0.25);
-  padding: 0.5rem 0.9rem;
-  cursor: pointer;
-  font-family: var(--mono);
-  font-size: 0.68rem;
-  letter-spacing: 0.14em;
-  text-transform: lowercase;
+  font-size: 0.85rem;
   color: var(--dim);
-  transition: border-color 0.4s ease, color 0.4s ease, background 0.4s ease;
+  border: 1px solid var(--line);
+  padding: 0.45rem 0.8rem;
+  cursor: pointer;
   user-select: none;
 }
 
 .choices label:hover {
-  border-color: var(--dim);
+  border-color: var(--line-strong);
   color: var(--ink);
 }
 
 .choices input[type="radio"],
 .choices input[type="checkbox"] {
-  accent-color: var(--ink);
+  accent-color: var(--accent);
   margin: 0;
   width: 0.85rem;
   height: 0.85rem;
@@ -323,68 +278,52 @@
 }
 
 .choices label:has(input:checked) {
-  border-color: var(--ink);
+  border-color: var(--accent);
   color: var(--ink);
-  background: rgba(255, 255, 255, 0.55);
+  background: rgba(232, 164, 76, 0.12);
+}
+
+.choices label:has(input:focus-visible) {
+  outline: 2px solid var(--ink);
+  outline-offset: 2px;
 }
 
 .choices.scale label { padding: 0.45rem 0.85rem; }
-
-/* the what-broke tick grid, denser than a chip row */
 .choices.ticks { gap: 0.4rem; }
-.choices.ticks label { padding: 0.45rem 0.75rem; }
+.choices.ticks label { padding: 0.4rem 0.7rem; }
 
-/* ---- send section ---- */
-
-.send-section .step-h {
-  font-size: 1rem;
-  font-weight: normal;
-  color: var(--ink);
-  margin: 3rem 0 0.9rem;
-}
+/* ---- send ---- */
 
 .report-actions {
   display: flex;
   flex-wrap: wrap;
-  gap: 1rem;
-  margin: 1.2rem 0 0.8rem;
+  gap: 0.75rem;
+  margin: 1.25rem 0 1rem;
 }
-
-button.support-btn {
-  appearance: none;
-  background: rgba(255, 255, 255, 0.25);
-  cursor: pointer;
-}
-
-button.support-btn:hover { background: rgba(255, 255, 255, 0.5); }
 
 .steps {
-  margin: 1.2rem 0 1.5rem;
+  margin: 1.25rem 0 1.5rem;
   padding-left: 1.3rem;
 }
 
 .steps li { margin: 0 0 0.85rem; }
 
-.clear-row { margin-top: 3.5rem; }
+.clear-row { margin-top: 3rem; }
 
 .linklike {
   appearance: none;
+  font: inherit;
+  font-size: 0.85rem;
+  color: var(--faint);
   background: none;
   border: none;
   padding: 0;
   cursor: pointer;
-  font-family: var(--mono);
-  font-size: 0.66rem;
-  letter-spacing: 0.12em;
-  color: var(--faint);
   text-decoration: underline;
   text-underline-offset: 3px;
-  transition: color 0.4s ease;
 }
 
 .linklike:hover { color: var(--ink); }
 
-@media (max-width: 540px) {
-  .report { padding-top: 14vh; }
-  .report section { padding: 3.2rem 0 0.8rem; }
-}
+/* thanks page */
+.report .thanks { padding-top: 3rem; }

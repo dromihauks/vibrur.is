@@ -1,20 +1,60 @@
-/* Víbrur Games / vibrur.is */
+/* víbrur games. colours and fonts are the game's own (bt_ui_tokens.css) */
+
+/* superglue by raymond larabie, cc0. the game's menu title face */
+@font-face {
+  font-family: "Superglue";
+  src: url("/fonts/superglue.otf") format("opentype");
+  font-display: swap;
+}
 
 :root {
-  --bg: #b0c6d8;
-  --sky-top: #a3bdd4;
-  --sky-mid: #bdcfdf;
-  --sky-low: #dfe9f0;
-  --ink: #2f3e4d;
-  --dim: #61788a;
-  --faint: #8ea4b4;
-  --line: rgba(47, 62, 77, 0.16);
-  --hi: #f6fafc;
-  --serif: Georgia, 'Times New Roman', serif;
-  --mono: ui-monospace, 'Cascadia Mono', Consolas, monospace;
+  --bg: #0a0a0a;
+  --panel: #101011;
+  --panel-2: #17181a;
+  --ink: #ededeb;
+  --dim: rgba(237, 237, 235, 0.62);
+  --faint: rgba(237, 237, 235, 0.44);
+  --line: rgba(237, 237, 235, 0.16);
+  --line-strong: rgba(237, 237, 235, 0.42);
+  --accent: #e8a44c;
+  --accent-line: rgba(232, 164, 76, 0.45);
+  --danger: #ef1d20;
+  --display: "Superglue", "Cascadia Mono", Consolas, monospace;
+  --mono: "Cascadia Mono", Consolas, "SF Mono", Menlo, monospace;
+  color-scheme: dark;
 }
 
 * { box-sizing: border-box; }
+
+html { background: var(--bg); }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font: 16px/1.65 var(--mono);
+  -webkit-text-size-adjust: 100%;
+}
+
+a { color: var(--accent); text-underline-offset: 3px; }
+a:hover { color: var(--ink); }
+
+:focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; }
+
+::selection { background: var(--accent); color: var(--bg); }
+
+img { display: block; max-width: 100%; height: auto; }
+
+h1, h2, h3 {
+  font-family: var(--display);
+  font-weight: normal;
+  line-height: 1.2;
+  margin: 0 0 1.25rem;
+}
+
+h2 { font-size: 1.35rem; }
+
+p { margin: 0 0 1rem; }
 
 .visually-hidden {
   position: absolute;
@@ -26,521 +66,199 @@
   border: 0;
 }
 
-html, body {
-  margin: 0;
-  padding: 0;
-  background: var(--bg);
-  color: var(--ink);
-  font-family: var(--serif);
-  font-size: 17px;
-  line-height: 1.75;
+.wrap {
+  max-width: 60rem;
+  margin: 0 auto;
+  padding-left: 1rem;
+  padding-right: 1rem;
 }
 
-body {
-  background: linear-gradient(180deg,
-    var(--sky-top) 0%,
-    var(--sky-mid) 55%,
-    var(--sky-low) 100%);
-  background-attachment: fixed;
+@media (min-width: 40rem) {
+  .wrap { padding-left: 2rem; padding-right: 2rem; }
 }
 
-html { scroll-behavior: smooth; }
+/* ---- header ---- */
 
-::selection { background: var(--ink); color: var(--hi); }
-
-a { color: var(--ink); text-decoration: none; }
-
-/* ---- atmosphere layers ---- */
-
-#grain {
-  position: fixed; inset: -60px;
-  pointer-events: none;
-  z-index: 40;
-  opacity: 0.06;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-  animation: grain 0.9s steps(4) infinite;
-}
-
-@keyframes grain {
-  0%   { transform: translate(0, 0); }
-  25%  { transform: translate(-22px, 14px); }
-  50%  { transform: translate(14px, -20px); }
-  75%  { transform: translate(-8px, -12px); }
-  100% { transform: translate(0, 0); }
-}
-
-/* a soft patch of sunlight; drifts on its own when you go idle */
-#light {
-  position: fixed;
-  left: 0; top: 0;
-  width: 90vmax; height: 90vmax;
-  margin-left: -45vmax; margin-top: -45vmax;
-  pointer-events: none;
-  z-index: 1;
-  border-radius: 50%;
-  background: radial-gradient(circle,
-    rgba(255, 255, 255, 0.22) 0%,
-    rgba(255, 255, 255, 0.09) 30%,
-    rgba(255, 255, 255, 0.0) 62%);
-  will-change: transform;
-}
-
-#motes {
-  position: fixed; inset: 0;
-  pointer-events: none;
-  z-index: 2;
-}
-
-/* a cloud crossing the set lights, every so often */
-#cloud {
-  position: fixed; inset: 0;
-  pointer-events: none;
-  z-index: 3;
-  background: #3a4f63;
-  opacity: 0;
-  animation: cloudpass 57s ease-in-out infinite;
-}
-
-@keyframes cloudpass {
-  0%, 74%, 100% { opacity: 0; }
-  84%           { opacity: 0.07; }
-  90%           { opacity: 0.05; }
-  94%           { opacity: 0.08; }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  #grain { animation: none; }
-  #cloud { animation: none; }
-  html { scroll-behavior: auto; }
-}
-
-/* ---- nav ---- */
-
-nav {
-  position: fixed;
-  top: 0; left: 0; right: 0;
-  z-index: 60;
+.top {
   display: flex;
-  align-items: baseline;
+  flex-wrap: wrap;
+  align-items: center;
   justify-content: space-between;
-  padding: 1.1rem 1.6rem;
-  font-family: var(--mono);
-  font-size: 0.72rem;
-  letter-spacing: 0.18em;
-  text-transform: lowercase;
+  gap: 1rem 2rem;
+  padding-top: 1.5rem;
+  padding-bottom: 1.5rem;
 }
 
-nav .wordmark {
-  letter-spacing: 0.34em;
-  text-transform: uppercase;
+.wordmark {
+  font-family: var(--display);
+  font-size: 1.25rem;
+  line-height: 1;
   color: var(--ink);
-}
-
-nav .links { display: flex; gap: 1.6rem; }
-
-nav .links a {
-  color: var(--dim);
-  transition: color 0.5s ease, letter-spacing 0.5s ease;
-}
-
-nav .links a:hover {
-  color: var(--ink);
-  letter-spacing: 0.26em;
-}
-
-/* ---- hero ---- */
-
-.hero {
-  position: relative;
-  min-height: 100vh;
-  min-height: 100svh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  z-index: 4;
-}
-
-.hero h1 {
-  font-weight: normal;
-  font-size: clamp(1.5rem, 5.4vw, 3rem);
-  letter-spacing: 0.42em;
-  text-indent: 0.42em; /* balance the trailing letter-space */
-  text-transform: uppercase;
-  color: var(--ink);
+  text-decoration: none;
   margin: 0;
-  text-align: center;
 }
 
-.hero h1 span {
-  display: inline-block;
-  transition: transform 1.6s cubic-bezier(0.16, 1, 0.3, 1),
-              opacity 1.6s ease;
-}
-
-.hero h1 span:hover {
-  transform: translateY(-3px);
-  opacity: 0.55;
-  transition-duration: 0.18s;
-}
-
-.beacon-row {
-  margin-top: 4.5rem;
+.top nav {
   display: flex;
-  flex-direction: column;
+  flex-wrap: wrap;
   align-items: center;
-  gap: 1.1rem;
+  gap: 0.5rem 1.5rem;
 }
 
-.beacon {
-  width: 5px; height: 5px;
-  border-radius: 50%;
-  background: var(--hi);
-  animation: pulse 4s ease-in-out infinite;
+.top nav a { color: var(--dim); text-decoration: none; }
+.top nav a:hover { color: var(--ink); }
+
+/* the game gets a real tab; it inverts on its own page like a menu tab in game */
+.top nav .tab {
+  color: var(--ink);
+  border: 1px solid var(--line-strong);
+  padding: 0.3rem 0.75rem;
 }
 
-@keyframes pulse {
-  0%, 100% { box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.5); opacity: 0.5; }
-  50%      { box-shadow: 0 0 18px 4px rgba(255, 255, 255, 0.3); opacity: 1; }
-}
-
-.soon {
-  font-family: var(--mono);
-  font-size: 0.68rem;
-  letter-spacing: 0.6em;
-  text-indent: 0.6em;
-  color: var(--dim);
-  text-transform: lowercase;
-  animation: breathe 7s ease-in-out infinite;
-}
-
-@keyframes breathe {
-  0%, 100% { opacity: 0.35; }
-  46%      { opacity: 0.9; }
-  52%      { opacity: 0.5; }
-  58%      { opacity: 0.85; }
-}
-
-.scrollcue {
-  position: absolute;
-  bottom: 2.4rem;
-  left: 50%;
-  width: 1px; height: 44px;
-  background: linear-gradient(var(--faint), transparent);
-  overflow: hidden;
-}
-
-.scrollcue::after {
-  content: "";
-  position: absolute;
-  left: 0; top: -40%;
-  width: 100%; height: 40%;
+.top nav .tab:hover,
+.top nav .tab[aria-current="page"] {
   background: var(--ink);
-  animation: drip 3.2s ease-in infinite;
-}
-
-@keyframes drip {
-  0%   { top: -40%; opacity: 0; }
-  30%  { opacity: 0.7; }
-  100% { top: 110%; opacity: 0; }
+  border-color: var(--ink);
+  color: var(--bg);
 }
 
 /* ---- sections ---- */
 
-main {
-  position: relative;
-  z-index: 4;
-  max-width: 38rem;
-  margin: 0 auto;
-  padding: 0 1.5rem 8rem;
+main section {
+  padding: 3rem 0;
+  border-top: 1px solid var(--line);
 }
 
-section { padding: 9rem 0 2rem; }
+@media (max-width: 40rem) {
+  main section { padding: 2.25rem 0; }
+}
 
-.sec-label {
-  font-family: var(--mono);
-  font-size: 0.68rem;
-  font-weight: normal;
-  letter-spacing: 0.32em;
-  text-transform: uppercase;
-  color: var(--dim);
-  margin: 0 0 2.6rem;
+.btn {
+  display: inline-block;
+  font: inherit;
+  color: var(--ink);
+  background: none;
+  border: 1px solid var(--ink);
+  padding: 0.7rem 1.4rem;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.btn:hover { background: var(--ink); color: var(--bg); }
+
+/* stands in for the wishlist link until the steam page is public */
+.btn.soon,
+.btn.soon:hover {
+  color: var(--accent);
+  border-color: var(--accent-line);
+  background: none;
+  cursor: default;
+}
+
+.links {
   display: flex;
-  align-items: baseline;
-  gap: 1rem;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1rem 1.75rem;
+  margin-top: 1.75rem;
 }
 
-.sec-label::before {
-  content: attr(data-index);
-  color: var(--faint);
-}
+/* ---- home: the game block ---- */
 
-.sec-label::after {
-  content: "";
-  flex: 1;
-  height: 1px;
-  background: var(--line);
-  align-self: center;
-}
+.game-card img { width: 100%; background: var(--panel); }
 
-section p { margin: 0 0 1.5rem; color: var(--ink); }
-
-section a { text-decoration: underline; text-underline-offset: 3px; }
-
-/* reveal on scroll */
-.reveal {
-  opacity: 0;
-  transform: translateY(14px);
-  transition: opacity 1.4s ease, transform 1.4s ease;
-}
-
-.reveal.on { opacity: 1; transform: none; }
-
-@media (prefers-reduced-motion: reduce) {
-  .reveal { opacity: 1; transform: none; transition: none; }
-}
-
-/* ---- redacted placeholder copy (awaiting real text) ---- */
-
-.redacted { margin: 0 0 1.5rem; }
-
-.redacted i {
-  display: block;
-  height: 0.85em;
-  margin: 0.55em 0;
-  background: var(--line);
-  animation: redact 9s ease-in-out infinite;
-}
-
-.redacted i:nth-child(2) { width: 92%; animation-delay: 1.2s; }
-.redacted i:nth-child(3) { width: 78%; animation-delay: 2.6s; }
-.redacted i:nth-child(4) { width: 44%; animation-delay: 3.8s; }
-
-@keyframes redact {
-  0%, 100% { opacity: 0.85; }
-  50%      { opacity: 0.4; }
-}
+.game-card h2 { margin: 1.5rem 0 0.75rem; font-size: clamp(1.2rem, 5.2vw, 1.6rem); }
+.game-card h2 a { color: var(--ink); text-decoration: none; }
+.game-card h2 a:hover { color: var(--accent); }
 
 /* ---- team ---- */
 
-.team-grid {
+.people {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.people li {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 0 1.5rem;
+  padding: 0.7rem 0;
+  border-top: 1px solid var(--line);
+}
+
+.people .role { color: var(--dim); }
+
+/* stack every row on phones so short roles don't sit differently from long ones */
+@media (max-width: 40rem) {
+  .people li { display: block; }
+  .people .role { display: block; }
+}
+
+/* ---- better together page ---- */
+
+.game-head {
+  text-align: center;
+  padding: 2.5rem 0 3rem;
+  border-top: 1px solid var(--line);
+}
+
+.game-head h1 { margin: 0 auto 2rem; max-width: 25rem; }
+.game-head h1 img { margin: 0 auto; width: 100%; }
+
+.blurb {
+  max-width: 36rem;
+  margin: 0 auto 2rem;
+  text-align: left;
+}
+
+.shots {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-  gap: 2.2rem;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem;
 }
 
-.member { text-align: left; }
+.shots a { display: block; }
+.shots .wide { grid-column: 1 / -1; }
+.shots img { width: 100%; aspect-ratio: 16 / 9; background: var(--panel); }
 
-.portrait {
-  position: relative;
-  aspect-ratio: 4 / 5;
-  border: 1px solid var(--line);
-  background: rgba(255, 255, 255, 0.28);
-  overflow: hidden;
-  margin-bottom: 0.9rem;
+@media (max-width: 40rem) {
+  .shots { grid-template-columns: 1fr; }
 }
 
-.portrait img {
-  width: 100%; height: 100%;
-  object-fit: cover;
-  display: block;
-  filter: grayscale(0.25) contrast(1.03);
-}
-
-.portrait.empty::before {
-  content: "";
-  position: absolute; inset: 0;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-  opacity: 0.06;
-}
-
-.portrait.empty::after {
-  content: "";
-  position: absolute;
-  left: 50%; top: 50%;
-  width: 4px; height: 4px;
-  margin: -2px 0 0 -2px;
-  border-radius: 50%;
-  background: var(--faint);
-  animation: pulse 5s ease-in-out infinite;
-}
-
-.member .name {
-  font-size: 0.95rem;
-  color: var(--ink);
-  margin: 0 0 0.15rem;
-}
-
-.member .role {
-  font-family: var(--mono);
-  font-size: 0.66rem;
-  letter-spacing: 0.16em;
-  text-transform: lowercase;
-  color: var(--dim);
+.facts {
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  gap: 0.5rem 2rem;
   margin: 0;
 }
 
-.member .name .bar,
-.member .role .bar {
-  display: inline-block;
-  width: 5.5em;
-  height: 0.7em;
-  background: var(--line);
-  animation: redact 9s ease-in-out infinite;
+.facts dt { color: var(--dim); }
+.facts dd { margin: 0; }
+
+@media (max-width: 30rem) {
+  .facts { grid-template-columns: 1fr; gap: 0; }
+  .facts dd { margin-bottom: 0.75rem; }
 }
 
-.member .role .bar { width: 3.5em; height: 0.6em; }
+/* ---- privacy page ---- */
 
-/* ---- projects ---- */
-
-.project-empty {
-  border: 1px dashed var(--line);
-  padding: 4.5rem 2rem;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 1.4rem;
-}
-
-.project-empty .idx {
-  font-family: var(--mono);
-  font-size: 0.66rem;
-  letter-spacing: 0.4em;
-  text-indent: 0.4em;
-  color: var(--faint);
-}
-
-.project-empty .tba {
-  font-size: 1.05rem;
-  letter-spacing: 0.5em;
-  text-indent: 0.5em;
-  text-transform: uppercase;
-  color: var(--ink);
-}
-
-.shimmer {
-  width: 130px;
-  height: 1px;
-  background: var(--line);
-  position: relative;
-  overflow: hidden;
-}
-
-.shimmer::after {
-  content: "";
-  position: absolute;
-  left: -40%; top: 0;
-  width: 40%; height: 100%;
-  background: var(--dim);
-  animation: sweep 4.6s ease-in-out infinite;
-}
-
-@keyframes sweep {
-  0%   { left: -40%; }
-  60%, 100% { left: 110%; }
-}
-
-/* ---- support page ---- */
-
-.page {
-  min-height: 72vh;
-  padding-top: 22vh;
-}
-
-.support-options {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1rem;
-  margin-top: 2.6rem;
-}
-
-.support-btn {
-  font-family: var(--mono);
-  font-size: 0.72rem;
-  letter-spacing: 0.22em;
-  text-transform: lowercase;
-  color: var(--ink);
-  border: 1px solid var(--faint);
-  padding: 0.85rem 2rem;
-  text-decoration: none !important;
-  transition: border-color 0.5s ease, color 0.5s ease, background 0.5s ease;
-}
-
-.support-btn:hover {
-  border-color: var(--ink);
-  background: rgba(255, 255, 255, 0.35);
-}
-
-.support-btn.ghost {
-  border-style: dashed;
-  color: var(--faint);
-  pointer-events: none;
-}
-
-/* ---- legal / policy pages ---- */
-
-.legal .updated {
-  font-family: var(--mono);
-  font-size: 0.66rem;
-  letter-spacing: 0.16em;
-  text-transform: lowercase;
-  color: var(--dim);
-  margin: 0 0 2.6rem;
-}
-
-.legal .lede { color: var(--ink); }
-
-.legal h3 {
-  font-size: 1rem;
-  font-weight: normal;
-  color: var(--ink);
-  margin: 2.8rem 0 0.8rem;
-}
-
-.legal ul {
-  margin: 0 0 1.5rem;
-  padding-left: 1.2rem;
-  color: var(--ink);
-}
-
+.legal section { max-width: 42rem; }
+.legal .updated { color: var(--dim); font-size: 0.85rem; }
+.legal h3 { font-family: var(--mono); font-size: 1rem; font-weight: bold; margin: 2.25rem 0 0.6rem; }
+.legal ul { margin: 0 0 1rem; padding-left: 1.2rem; }
 .legal li { margin: 0 0 0.6rem; }
 
 /* ---- footer ---- */
 
-footer {
-  position: relative;
-  z-index: 4;
+.foot {
   border-top: 1px solid var(--line);
-  margin-top: 4rem;
-  padding: 3rem 1.6rem 3.4rem;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1.2rem 3rem;
-  justify-content: space-between;
-  font-family: var(--mono);
-  font-size: 0.68rem;
-  letter-spacing: 0.14em;
-  color: var(--dim);
+  padding-top: 3rem;
+  padding-bottom: 3rem;
 }
 
-footer .col { display: flex; flex-direction: column; gap: 0.5rem; }
-
-footer a { color: var(--dim); transition: color 0.5s ease; }
-footer a:hover { color: var(--ink); }
-
-footer a.pending {
-  color: var(--faint);
-  pointer-events: none;
-}
-
-#clock { color: var(--faint); font-variant-numeric: tabular-nums; }
-
-@media (max-width: 540px) {
-  nav .links { gap: 1rem; }
-  section { padding: 6.5rem 0 1.5rem; }
-  .hero h1 {
-    font-size: 1.15rem;
-    letter-spacing: 0.34em;
-    text-indent: 0.34em;
-  }
-}
+.foot p { margin: 0 0 0.35rem; }
+.foot .small { margin-top: 2rem; font-size: 0.8rem; color: var(--faint); }
+.foot .small a { color: var(--faint); }
+.foot .small a:hover { color: var(--ink); }

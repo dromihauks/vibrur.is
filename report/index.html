@@ -8,42 +8,38 @@
 <meta name="robots" content="noindex">
 <title>Víbrur Games · Playtest Report</title>
 <meta name="description" content="Playtest report form for Better Together testers.">
-<meta name="theme-color" content="#a3bdd4">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect width='16' height='16' fill='%23a3bdd4'/%3E%3Ccircle cx='8' cy='8' r='2' fill='%23f6fafc'/%3E%3C/svg%3E">
-<link rel="stylesheet" href="../styles.css">
-<link rel="stylesheet" href="report.css">
+<meta name="theme-color" content="#0a0a0a">
+<meta name="color-scheme" content="dark">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect width='16' height='16' fill='%230a0a0a'/%3E%3Ccircle cx='8' cy='8' r='5' fill='none' stroke='%23ededeb' stroke-width='1.6'/%3E%3Ccircle cx='8' cy='8' r='1.8' fill='%23ef1d20'/%3E%3C/svg%3E">
+<link rel="preload" href="/fonts/superglue.otf" as="font" type="font/otf" crossorigin>
+<link rel="stylesheet" href="/styles.css">
+<link rel="stylesheet" href="/report/report.css">
 <link rel="canonical" href="https://vibrur.is/report/">
 </head>
 <body>
 
-<div id="light" aria-hidden="true"></div>
-<canvas id="motes" aria-hidden="true"></canvas>
-<div id="grain" aria-hidden="true"></div>
-<div id="cloud" aria-hidden="true"></div>
+<header class="top wrap">
+  <a class="wordmark" href="/">Víbrur Games</a>
+  <nav aria-label="Main">
+    <a class="tab" href="/better-together/">Better Together</a>
+    <a href="/#team">Team</a>
+    <a href="#contact">Contact</a>
+  </nav>
+</header>
 
-<nav>
-  <a class="wordmark" href="../index.html">Víbrur</a>
-  <div class="links">
-    <a href="../index.html#about">about</a>
-    <a href="../index.html#team">team</a>
-    <a href="../index.html#projects">projects</a>
-    <a href="../support.html">support</a>
-  </div>
-</nav>
-
-<button type="button" id="progress-pill" class="progress-pill" title="jump to the send button">
+<button type="button" id="progress-pill" class="progress-pill" title="Jump to the send button">
   <span class="pp-track" aria-hidden="true"><span class="pp-fill" id="pp-fill"></span></span>
   <span id="pp-text">0 answered</span>
 </button>
 
-<main class="page report">
+<main class="wrap report">
   <h1 class="visually-hidden">Víbrur Games · Playtest Report</h1>
 
-  <section class="reveal on">
+  <section>
     <h2 class="sec-label" data-index="00">Playtest report</h2>
-    <p>You played <strong>Better Together</strong>. Thank you. Now tell me everything.</p>
-    <p>Most of this form is <strong>tap-what's-true</strong>, so type only where you have something to say. Every question is optional except your name and the build number. There are no wrong answers; if you were confused, that is the game's fault, not yours, and exactly what I need to hear. Answer in <strong>Icelandic or English</strong>, whichever is faster.</p>
-    <p class="mono-note">about 5 minutes if you mostly tap, plus a minute for each study you played. answers autosave in this browser as you type, and everything, including your log file if you attach one, comes straight to me when you hit <strong>send</strong>. no account, no login. one ask: write about the session you <em>just</em> played, not last week's.</p>
+    <p>Thanks for playing <strong>Better Together</strong>. Tell me how it went.</p>
+    <p>Most of it is tapping. Only your name and build number are required. If something confused you, that's the game's fault, and I want to hear about it. Icelandic or English is fine.</p>
+    <p class="mono-note">About 5 minutes, plus a minute for each study. Your answers save in this browser as you go. Write about the session you just played.</p>
   </section>
 
   <form id="report-form" action="https://formsubmit.co/dromi@vibrur.is" method="POST" enctype="multipart/form-data" autocomplete="off">
@@ -55,25 +51,25 @@
     <input type="hidden" id="browser-context" name="Filled in from">
     <input type="text" name="_honey" tabindex="-1" autocomplete="off" aria-hidden="true" class="honey">
 
-  <section class="reveal on" data-sec="Your session">
+  <section data-sec="Your session">
     <h2 class="sec-label" data-index="01">Your session <span class="sec-time">~1 min</span></h2>
 
     <div class="q">
-      <label class="q-label" for="q-name">Your name or nickname <span class="req">(required, so I can match you to your log files)</span></label>
+      <label class="q-label" for="q-name">Your name or nickname <span class="req">(required)</span></label>
       <input type="text" id="q-name" name="name" required>
-      <span class="hint">if your Steam name is different, put both</span>
+      <span class="hint">If your Steam name is different, put both.</span>
     </div>
 
     <div class="q">
       <label class="q-label" for="q-build">Which build did you play? <span class="req">(required)</span></label>
       <input type="text" id="q-build" name="build_version" required>
-      <span class="hint">main menu, along the bottom of the screen: <code>BUILD 0.0.3.27</code>. copy whatever number yours says. can't find it? write "don't know" and send anyway.</span>
+      <span class="hint">It's at the bottom of the main menu, like <code>BUILD 0.0.3.27</code>. Can't find it? Write "don't know".</span>
     </div>
 
     <div class="q">
       <label class="q-label" for="q-when">When did you play, and for roughly how long?</label>
       <input type="text" id="q-when" name="when_played">
-      <span class="hint">a date and a rough clock time let me find your session in the log. for example "July 19, started around 20:00, about 2 hours"</span>
+      <span class="hint">For example "Sept 24, started around 20:00, about 2 hours".</span>
     </div>
 
     <div class="q" data-label="Which machine did you play on?">
@@ -130,7 +126,7 @@
       <div class="subq">
         <label class="subq-label" for="q-specs">PC: CPU / graphics card / RAM</label>
         <input type="text" id="q-specs" name="pc_specs">
-        <span class="hint">don't worry if you don't know, anything helps, even "gaming laptop from 2021"</span>
+        <span class="hint">Anything helps, even "gaming laptop from 2021".</span>
       </div>
 
       <div class="subq" data-label="Played with">
@@ -170,7 +166,7 @@
     </div>
   </section>
 
-  <section class="reveal on" data-sec="Getting in">
+  <section data-sec="Getting in">
     <h2 class="sec-label" data-index="02">Getting in <span class="sec-time">~30 sec</span></h2>
 
     <div class="q" data-label="Getting into the game (installing, updating, hosting, joining) went…">
@@ -185,7 +181,7 @@
     <div class="q" data-show-when="getting_in=mostly fine|something went wrong">
       <label class="q-label" for="q-getin">What went wrong, and what did you see on screen?</label>
       <textarea id="q-getin" name="getting_in_trouble"></textarea>
-      <span class="hint">the exact words of any error message are gold, even half-remembered</span>
+      <span class="hint">The exact words of any error message help the most.</span>
     </div>
 
     <div class="q" data-label="From launching to actually playing felt… (1 = fought it, 5 = effortless)">
@@ -200,19 +196,19 @@
     </div>
   </section>
 
-  <section class="reveal on" data-sec="Finding your feet">
+  <section data-sec="Finding your feet">
     <h2 class="sec-label" data-index="03">Finding your feet <span class="sec-time">~1 min</span></h2>
 
     <div class="q">
       <label class="q-label" for="q-goal">In your own words, what is this game asking you to do?</label>
       <textarea id="q-goal" name="perceived_goal"></textarea>
-      <span class="hint">answer from what the game showed you, not from what anyone told you</span>
+      <span class="hint">Go by what the game showed you, not what someone told you.</span>
     </div>
 
     <div class="q">
       <label class="q-label" for="q-toldby">What did you have to be told by another player, or work out the hard way?</label>
       <textarea id="q-toldby" name="learned_the_hard_way"></textarea>
-      <span class="hint">a button, a key, where something is, what something was for. anything the game should have told you itself</span>
+      <span class="hint">A key, a place, what something was for. Anything the game should have told you itself.</span>
     </div>
 
     <div class="q" data-label="Was there ever a stretch with nothing to do?">
@@ -241,7 +237,7 @@
     </div>
   </section>
 
-  <section class="reveal on" data-sec="How far you got">
+  <section data-sec="How far you got">
     <h2 class="sec-label" data-index="04">How far you got <span class="sec-time">~1 min per study</span></h2>
 
     <div class="q" data-label="What day did you reach this session?">
@@ -263,7 +259,7 @@
         <label><input type="radio" name="day_reached" value="day 14"><span>day 14</span></label>
         <label><input type="radio" name="day_reached" value="not sure"><span>not sure</span></label>
       </div>
-      <span class="hint">the day you ended on. if you continued from an earlier save, that still counts. every study up to that day shows up below.</span>
+      <span class="hint">The day you ended on. Every study up to that day shows up below.</span>
     </div>
 
     <div class="q" data-label="How did the session end?">
@@ -283,19 +279,19 @@
     </div>
 
     <h3 class="sub-h">The studies</h3>
-    <p class="mono-note" id="studies-empty">pick the day you reached above, and a card for every study up to it appears here.</p>
+    <p class="mono-note" id="studies-empty">Pick the day you reached and the studies show up here.</p>
 
     <div id="studies-block">
-      <p class="mono-note">one card per study. tap <strong>played it</strong> to open its questions, and skip anything you don't remember. a low score with a sentence of why is the most useful thing on this page.</p>
+      <p class="mono-note">Tap <strong>played it</strong> to open a study, and skip anything you don't remember. A low score with one sentence of why helps the most.</p>
       <div id="study-cards"></div>
       <div id="study-picks"></div>
     </div>
   </section>
 
-  <section class="reveal on" data-sec="The mechanics">
+  <section data-sec="The mechanics">
     <h2 class="sec-label" data-index="05">The mechanics <span class="sec-time">~1 min</span></h2>
 
-    <p class="mono-note">how much each one added to the game for you. 1 = I'd cut it, 5 = the best part. tap <strong>didn't use it</strong> if it never came up.</p>
+    <p class="mono-note">How much each one added for you. 1 = I'd cut it, 5 = the best part, or <strong>didn't use it</strong>.</p>
 
     <div id="mechanic-rows"></div>
 
@@ -311,15 +307,15 @@
     </div>
 
     <div class="q">
-      <label class="q-label" for="q-shop">The shop: what did you buy? Did each thing actually work when you tried to use it?</label>
+      <label class="q-label" for="q-shop">The shop: what did you buy, and did it work?</label>
       <textarea id="q-shop" name="shop_items"></textarea>
-      <span class="hint">list them one by one if you can. "bought the tripwire, couldn't place it anywhere" is worth more to me than anything else on this page.</span>
+      <span class="hint">One by one if you can, like "bought the tripwire, couldn't place it".</span>
     </div>
 
     <div class="q">
       <label class="q-label" for="q-mechcut">Which mechanic would you cut, and which do you want more of?</label>
       <textarea id="q-mechcut" name="mechanics_cut_or_more"></textarea>
-      <span class="hint">and why. "the flashlight, it's the only thing I used all night" tells me plenty.</span>
+      <span class="hint">And why.</span>
     </div>
 
     <div class="q">
@@ -328,9 +324,9 @@
     </div>
   </section>
 
-  <p class="mono-note milestone">halfway, and even a half-filled report is worth sending. the send button works from anywhere.</p>
+  <p class="mono-note milestone">Halfway there. A half-filled report is still worth sending.</p>
 
-  <section class="reveal on" data-sec="Playing together">
+  <section data-sec="Playing together">
     <h2 class="sec-label" data-index="06">Playing together <span class="sec-time">~45 sec</span></h2>
 
     <div class="q" data-label="Voice chat…">
@@ -347,13 +343,12 @@
     <div class="q" data-show-when="voice_status=choppy or robotic at times|someone couldn't hear or talk|didn't work at all">
       <label class="q-label" for="q-voice">Who had the problem, and did anything fix it?</label>
       <textarea id="q-voice" name="voice_detail"></textarea>
-      <span class="hint">"X couldn't hear Y after we died once" is exactly the shape of sentence I need. rejoining, restarting, changing a setting: tell me what fixed it, if anything did.</span>
+      <span class="hint">Like "X couldn't hear Y after we died". Say what fixed it, if anything did.</span>
     </div>
 
     <div class="q">
-      <label class="q-label" for="q-desync">Did the game ever disagree with itself, a door open for one of you but closed for another, an item only one player could see, someone walking in place?</label>
+      <label class="q-label" for="q-desync">Did the game ever show you different things? A door open for one of you and shut for another, someone walking in place?</label>
       <textarea id="q-desync" name="desyncs"></textarea>
-      <span class="hint">sounds impossible, happens constantly. anything like this you noticed, however small.</span>
     </div>
 
     <div class="q" data-label="Did you stay together or split up?">
@@ -371,13 +366,13 @@
     </div>
   </section>
 
-  <section class="reveal on" data-sec="Fear and feel">
+  <section data-sec="Fear and feel">
     <h2 class="sec-label" data-index="07">Fear &amp; feel <span class="sec-time">~45 sec</span></h2>
 
     <div class="q">
       <label class="q-label" for="q-scariest">Scariest or tensest moment of this session?</label>
       <textarea id="q-scariest" name="scariest_moment"></textarea>
-      <span class="hint">and when did the night first start to feel dangerous, or did it never?</span>
+      <span class="hint">And when did the night first feel dangerous, if it ever did?</span>
     </div>
 
     <div class="q" data-label="The fear level was…">
@@ -416,11 +411,11 @@
     </div>
   </section>
 
-  <section class="reveal on" data-sec="What broke">
+  <section data-sec="What broke">
     <h2 class="sec-label" data-index="08">What broke <span class="sec-time">~1 min</span></h2>
 
     <div class="callout">
-      <p class="mono-note">this session only, please. if it's been broken for weeks, or you already sent it to me, leave it out. that's how I tell what's still broken from what I've already fixed.</p>
+      <p class="mono-note">This session only. Leave out anything you've already reported.</p>
     </div>
 
     <div class="q" data-label="Tick anything that happened this session:">
@@ -454,11 +449,11 @@
     <div class="q">
       <label class="q-label" for="q-brokedetail">For anything you ticked, what were you doing, and roughly when?</label>
       <textarea id="q-brokedetail" name="what_broke_detail"></textarea>
-      <span class="hint">rough clock times ("around 21:30") help me find the exact moment in your log. anything else you noticed (stuck spots, floating objects, missing text, weird lighting) goes here too.</span>
+      <span class="hint">Rough times like "around 21:30" help me find it in your log. Anything else odd goes here too.</span>
     </div>
   </section>
 
-  <section class="reveal on" data-sec="Verdict">
+  <section data-sec="Verdict">
     <h2 class="sec-label" data-index="09">Verdict <span class="sec-time">~1 min</span></h2>
 
     <div class="q" data-label="Fun (1 = a chore, 5 = lost track of time)">
@@ -498,11 +493,11 @@
         <label><input type="radio" name="fair_price" value="€15 to 20"><span>€15 to 20</span></label>
         <label><input type="radio" name="fair_price" value="over €20"><span>over €20</span></label>
       </div>
-      <span class="hint">honest answers only, you cannot hurt my feelings with this one</span>
+      <span class="hint">Be honest. You won't hurt my feelings.</span>
     </div>
 
     <div class="q">
-      <label class="q-label" for="q-fixfirst">If I can only fix ONE thing before the next test, what should it be?</label>
+      <label class="q-label" for="q-fixfirst">If I could fix one thing before the next test, what should it be?</label>
       <textarea id="q-fixfirst" name="fix_first"></textarea>
     </div>
 
@@ -512,63 +507,56 @@
     </div>
 
     <div class="q">
-      <label class="q-label" for="q-recording">Did you record or stream your session? Paste a link, I would love to watch it.</label>
+      <label class="q-label" for="q-recording">Recorded or streamed it? Paste a link.</label>
       <input type="text" id="q-recording" name="session_recording">
     </div>
 
     <div class="q">
-      <label class="q-label" for="q-anything">Anything else: thoughts, feelings, theories, complaints, ideas?</label>
+      <label class="q-label" for="q-anything">Anything else?</label>
       <textarea id="q-anything" name="anything_else"></textarea>
     </div>
   </section>
 
-  <section class="reveal on">
-    <h2 class="sec-label" data-index="10">Your logs, optional but gold <span class="sec-time">~30 sec</span></h2>
-    <p>Your game wrote a log file while you played. It tells me exactly what went wrong on your machine, and attaching it is the single most useful thing you can do. It rides along with this form, no separate email:</p>
+  <section>
+    <h2 class="sec-label" data-index="10">Your log file <span class="sec-time">~30 sec</span></h2>
+    <p>The game writes a log while you play. Attaching it is the most useful thing you can do.</p>
     <ol class="steps">
       <li>Click <strong>Choose file</strong> below.</li>
-      <li>In the window that opens, click the address bar at the top, paste this line, and press Enter:<br><code>%LOCALAPPDATA%\BetterTogether\Saved\Logs</code></li>
-      <li>Pick <strong>BetterTogether.log</strong> (the newest one). Crashed? You can also add files from <code>...\Saved\Crashes</code>.</li>
+      <li>Paste this into the address bar and press Enter:<br><code>%LOCALAPPDATA%\BetterTogether\Saved\Logs</code></li>
+      <li>Pick <strong>BetterTogether.log</strong>. If the game crashed, add the files in <code>...\Saved\Crashes</code> too.</li>
     </ol>
     <div class="q">
       <label class="q-label" for="q-attach">Attach your log file(s)</label>
       <input type="file" id="q-attach" name="attachment" multiple accept=".log,.txt,.zip,.dmp,.gz,.json,.png,.jpg,.jpeg,.webp">
-      <span class="hint" id="attach-hint">screenshots of bugs are welcome here too. up to 10 MB total. bigger than that? email it to dromi@vibrur.is instead; the rest still sends.</span>
+      <span class="hint" id="attach-hint">Screenshots are welcome too. Up to 10 MB in total. Bigger files can go to dromi@vibrur.is.</span>
     </div>
   </section>
 
-  <section class="reveal on send-section">
+  <section class="send-section">
     <h2 class="sec-label" data-index="11">Send</h2>
     <p class="mono-note"><span id="answer-count"></span></p>
     <div class="report-actions">
-      <button type="submit" class="support-btn" id="btn-send">send my report</button>
-      <button type="button" class="support-btn" id="btn-download">download my answers as a .txt</button>
+      <button type="submit" class="btn" id="btn-send">Send my report</button>
+      <button type="button" class="btn" id="btn-download">Download my answers as .txt</button>
     </div>
-    <p class="mono-note" id="send-status" aria-live="polite">one click and it comes straight to me, answers and log together.</p>
-    <p class="mono-note">the report also notes which browser and screen it was filled in on, nothing else.</p>
-    <p class="mono-note clear-row"><button type="button" id="btn-clear" class="linklike">clear all my answers and start over</button></p>
+    <p class="mono-note" id="send-status" aria-live="polite">Your answers and log come straight to me.</p>
+    <p class="mono-note">It also notes your browser and screen size, nothing else.</p>
+    <p class="mono-note clear-row"><button type="button" id="btn-clear" class="linklike">Clear all my answers and start over</button></p>
   </section>
 
   </form>
 
 </main>
 
-<footer>
-  <div class="col">
-    <a href="mailto:dromi@vibrur.is">dromi@vibrur.is</a>
-    <span>&copy; 2026 Víbrur Games</span>
-    <a href="/privacy-policy/">privacy</a>
-  </div>
-  <div class="col">
-    <a data-social="instagram">instagram</a>
-    <a data-social="tiktok">tiktok</a>
-  </div>
-  <div class="col">
-    <span id="clock"></span>
+<footer class="wrap" id="contact">
+  <div class="foot">
+    <h2>Contact</h2>
+    <p><a href="mailto:dromi@vibrur.is">dromi@vibrur.is</a></p>
+    <p><a href="https://www.instagram.com/vibrur" rel="noreferrer">Instagram</a> · <a href="https://www.tiktok.com/@vibrur" rel="noreferrer">TikTok</a></p>
+    <p class="small">&copy; 2026 Víbrur Games · <a href="/privacy-policy/">Privacy</a></p>
   </div>
 </footer>
 
-<script src="../site.js"></script>
-<script src="report.js"></script>
+<script src="/report/report.js"></script>
 </body>
 </html>
