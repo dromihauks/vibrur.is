@@ -204,7 +204,7 @@ main section {
   border-top: 1px solid var(--line);
 }
 
-.game-head h1 { margin: 0 auto 2rem; max-width: 25rem; }
+.game-head h1 { margin: 0 auto 2rem; max-width: 24rem; }
 .game-head h1 img { margin: 0 auto; width: 100%; }
 
 .blurb {
