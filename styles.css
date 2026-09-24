@@ -52,7 +52,9 @@ h1, h2, h3 {
   margin: 0 0 1.25rem;
 }
 
-h2 { font-size: 1.35rem; }
+/* superglue is wide; single words like SCREENSHOTS must fit a 320 px phone */
+h1 { font-size: clamp(1.5rem, 8vw, 2rem); }
+h2 { font-size: clamp(1.1rem, 5.5vw, 1.35rem); }
 
 p { margin: 0 0 1rem; }
 
@@ -133,6 +135,8 @@ main section {
   main section { padding: 2.25rem 0; }
 }
 
+main section > p { max-width: 44rem; }
+
 .btn {
   display: inline-block;
   font: inherit;
@@ -173,13 +177,13 @@ main section {
 
 /* ---- team ---- */
 
-.people {
+.rows {
   list-style: none;
   margin: 0;
   padding: 0;
 }
 
-.people li {
+.rows li {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
@@ -188,12 +192,12 @@ main section {
   border-top: 1px solid var(--line);
 }
 
-.people .role { color: var(--dim); }
+.rows .role { color: var(--dim); }
 
 /* stack every row on phones so short roles don't sit differently from long ones */
 @media (max-width: 40rem) {
-  .people li { display: block; }
-  .people .role { display: block; }
+  .rows li { display: block; }
+  .rows .role { display: block; }
 }
 
 /* ---- better together page ---- */
