@@ -592,9 +592,36 @@
       }
     } catch (err) { /* formatting is a nicety; the fields still send */ }
 
+    // FormSubmit keeps one value per name, so a tick-all group ("it felt", what broke)
+    // arrived as its last tick only. post each group once, joined, and hold the boxes
+    // themselves out of the post (pageshow hands them back if the player comes back)
+    try {
+      var groups = {};
+      form.querySelectorAll("input[type=checkbox][name]").forEach(function (c) {
+        if (!c.checked) return;
+        (groups[c.name] = groups[c.name] || []).push(c.value);
+      });
+      form.querySelectorAll("input[data-joined]").forEach(function (h) { h.remove(); });
+      Object.keys(groups).forEach(function (n) {
+        var h = document.createElement("input");
+        h.type = "hidden";
+        h.name = n;
+        h.value = groups[n].join("; ");
+        h.setAttribute("data-joined", "1");
+        form.appendChild(h);
+      });
+      form.querySelectorAll("input[type=checkbox][name]").forEach(function (c) { c.disabled = true; });
+    } catch (err) { /* worst case the old last-tick-only post */ }
+
     // let it submit natively to FormSubmit; keep answers in storage as a
     // safety net in case the network hiccups (cleared via the clear button).
     if (sendStatus) sendStatus.textContent = "sending…";
+  });
+
+  // back from the thanks page (bfcache): the boxes the submit held out are the player's again
+  window.addEventListener("pageshow", function () {
+    form.querySelectorAll("input[data-joined]").forEach(function (h) { h.remove(); });
+    form.querySelectorAll("input[type=checkbox]:disabled").forEach(function (c) { c.disabled = false; });
   });
 
   if (btnDownload) {
