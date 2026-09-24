@@ -242,6 +242,46 @@ main section {
   .facts dd { margin-bottom: 0.75rem; }
 }
 
+/* ---- screenshot viewer ---- */
+
+.viewer {
+  width: 100%;
+  height: 100%;
+  height: 100dvh;
+  max-width: none;
+  max-height: none;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  overflow: hidden;
+  background: var(--bg);
+  color: var(--ink);
+}
+
+.viewer[open] { display: flex; flex-direction: column; }
+.viewer::backdrop { background: var(--bg); }
+
+.viewer img {
+  flex: 1;
+  min-height: 0;
+  width: 100%;
+  object-fit: contain;
+}
+
+.viewer-bar {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+  padding-bottom: max(1rem, env(safe-area-inset-bottom));
+  font-variant-numeric: tabular-nums;
+}
+
+.viewer-bar .btn { padding: 0.55rem 1.1rem; }
+.viewer-close { margin-left: auto; }
+
+html.viewer-open { overflow: hidden; }
+
 /* ---- privacy page ---- */
 
 .legal section { max-width: 42rem; }

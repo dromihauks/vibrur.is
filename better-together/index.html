@@ -97,5 +97,16 @@
   </div>
 </footer>
 
+<dialog class="viewer" id="viewer" aria-label="Screenshots">
+  <img id="viewer-img" alt="">
+  <div class="viewer-bar">
+    <button type="button" class="btn" data-go="-1" aria-label="Previous screenshot">←</button>
+    <span id="viewer-count" aria-live="polite"></span>
+    <button type="button" class="btn" data-go="1" aria-label="Next screenshot">→</button>
+    <button type="button" class="btn viewer-close">Close</button>
+  </div>
+</dialog>
+
+<script src="/better-together/shots.js" defer></script>
 </body>
 </html>
