@@ -150,14 +150,9 @@ main section > p { max-width: 44rem; }
 
 .btn:hover { background: var(--ink); color: var(--bg); }
 
-/* stands in for the wishlist link until the steam page is public */
-.btn.soon,
-.btn.soon:hover {
-  color: var(--accent);
-  border-color: var(--accent-line);
-  background: none;
-  cursor: default;
-}
+/* valve's logo as is: 50 px tall, its own clear space, no words on it */
+.steam-logo { display: inline-block; padding: 0.5rem; line-height: 0; }
+.links .steam-logo img { width: auto; height: 50px; background: none; }
 
 .links {
   display: flex;
@@ -210,6 +205,7 @@ main section > p { max-width: 44rem; }
 
 .game-head h1 { margin: 0 auto 2rem; max-width: 24rem; }
 .game-head h1 img { margin: 0 auto; width: 100%; }
+.game-head .links { justify-content: center; }
 
 .blurb {
   max-width: 36rem;
@@ -304,5 +300,6 @@ html.viewer-open { overflow: hidden; }
 
 .foot p { margin: 0 0 0.35rem; }
 .foot .small { margin-top: 2rem; font-size: 0.8rem; color: var(--faint); }
+.foot .legal { margin-top: 0.5rem; font-size: 0.7rem; }
 .foot .small a { color: var(--faint); }
 .foot .small a:hover { color: var(--ink); }
