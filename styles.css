@@ -164,6 +164,9 @@ main section > p { max-width: 44rem; }
 
 /* ---- home: the game block ---- */
 
+.steam-widget { padding: 2.5rem 0 3rem; }
+.steam-widget iframe { display: block; margin: 0 auto; width: 100%; max-width: 646px; height: 190px; border: 0; }
+
 .game-card img { width: 100%; background: var(--panel); }
 
 .game-card h2 { margin: 1.5rem 0 0.75rem; font-size: clamp(1.2rem, 5.2vw, 1.6rem); }
