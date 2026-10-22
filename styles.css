@@ -303,6 +303,5 @@ html.viewer-open { overflow: hidden; }
 
 .foot p { margin: 0 0 0.35rem; }
 .foot .small { margin-top: 2rem; font-size: 0.8rem; color: var(--faint); }
-.foot .legal { margin-top: 0.5rem; font-size: 0.7rem; }
 .foot .small a { color: var(--faint); }
 .foot .small a:hover { color: var(--ink); }
